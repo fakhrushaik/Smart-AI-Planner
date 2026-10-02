@@ -2,8 +2,8 @@
 Fields that reqire encryption
 | Table | Field | Reason |
 | --- | --- | --- |
-| Account | AccountEmail | PII (contact information) |
-| Account | AccountPhone | PII (contact information) |
+| Account | AccountEmail | PII |
+| Account | AccountPhone | PII |
 | Account | AccountFirstName | PII |
 | Account | AccountLastName | PII |
 | Event | EventLocation | Sensitive personal schedule data |
