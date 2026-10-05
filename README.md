@@ -1,5 +1,7 @@
 # Smart AI Planner
 
+[Project timeline](https://github.com/users/fakhrushaik/projects/3) · [Tasks and subtasks](https://github.com/fakhrushaik/Smart-AI-Planner/issues) · [Commit history](https://github.com/fakhrushaik/Smart-AI-Planner/commits/main/)
+
 **Team 59 · Senior Design Team Contract**
 
 University of Cincinnati  
