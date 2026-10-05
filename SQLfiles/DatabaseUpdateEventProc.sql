@@ -3,31 +3,34 @@
 -- Update Event
 
 -- Assume that all var handling will be done prior to execution
--- Vars will be default null unless set, allowing for only updating new info
-CREATE PROC newEvent
-@AccountID as int = NULL,
-@EventTitle as varchar(25) = NULL,
-@EventStartDate as date = NULL,
-@EventEndDate as date = NULL,
-@EventAllDay as tinyint = NULL,
-@EventStartTime as time = NULL,
-@EventEndTime as time = NULL,
-@EventNotes as varchar(100) = NULL,
-@EventLocation as varchar(100) = NULL,
-@EventRepeat as varchar(25) = NULL,
-@EventTravelTime as varchar(25) = NULL,
-@EventURL as varchar(75) = NULL,
-@EventAlert as varchar(25) = NULL
+-- Vars always be passed in as the user will be updating the event from the full event infromation
+-- So no need to placeholder will NULL, also this means the entire row can be replaced always
+CREATE PROC Event
+@EventID as int,
+@AccountID as int,
+@EventTitle as varchar(25),
+@EventStartDate as date,
+@EventEndDate as date,
+@EventAllDay as tinyint,
+@EventStartTime as time,
+@EventEndTime as time,
+@EventNotes as varchar(100),
+@EventLocation as varchar(100),
+@EventRepeat as varchar(25),
+@EventTravelTime as varchar(25),
+@EventURL as varchar(75),
+@EventAlert as varchar(25)
 
 AS
 
 BEGIN TRAN
 
-INSERT INTO Events (AccountID, EventTitle, EventStartDate, EventEndDate, EventAllDay,
-EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime,
-EventURL, EventAlert)
-VALUES (@AccountID, @EventTitle, @EventStartDate, @EventEndDate, @EventAllDay,
-@EventStartTime, @EventEndTime, @EventNotes, @EventLocation, @EventRepeat, @EventTravelTime,
-@EventURL, @EventAlert)
+UPDATE Events 
+SET AccountID = @AccountID, EventTitle = @EventID, EventStartDate = @EventStartDate, 
+EventEndDate = @EventEndDate, EventAllDay = @EventAllDay,
+EventStartTime = @EventStartTime, EventEndTime = @EventEndTime, EventNotes = @EventNotes, 
+EventLocation = @EventLocation, EventRepeat = @EventRepeat, EventTravelTime = @EventTravelTime,
+EventURL = @EventURL, EventAlert = @EventAlert
+WHERE EventID = @EventID
 
 COMMIT TRAN
