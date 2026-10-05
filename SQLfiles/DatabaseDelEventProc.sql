@@ -1,6 +1,6 @@
 -- Date: 10/2/26
 
--- Add Event
+-- Delete Event
 
 -- Requires only the event ID
 CREATE PROC delEvent
