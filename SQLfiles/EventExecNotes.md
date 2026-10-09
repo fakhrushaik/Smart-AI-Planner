@@ -5,6 +5,7 @@ EXEC newEvent
 -- new event creates an event, the assumption is that the variables will be checked prior to being executed and that all vars will be provided
     -- @AccountID as int,
     -- @EventTitle as varchar(25),
+    -- @EventDescription as varchar(250),
     -- @EventStartDate as date,
     -- @EventEndDate as date,
     -- @EventAllDay as tinyint,
@@ -26,6 +27,7 @@ EXEC updateEvent
     -- @EventID as int,
     -- @AccountID as int,
     -- @EventTitle as varchar(25),
+    -- @EventDescription as varchar(250),
     -- @EventStartDate as date,
     -- @EventEndDate as date,
     -- @EventAllDay as tinyint,

@@ -10,7 +10,7 @@ cursor.execute("SELECT EventID, EventTitle, EventStartDate, " \
 rows = cursor.fetchall()
 
 for row in rows:
-    EventID, EventTitle, EventStartDate, EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime, EventURL, EventAlert = row
+    EventID, EventTitle, EventDescription, EventStartDate, EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime, EventURL, EventAlert = row
 
     #Formatting ics text based on template
     ics_content = f"""BEGIN:VCALENDAR
@@ -23,7 +23,7 @@ for row in rows:
     DTSTART:{EventStartTime}
     DTEND:{EventEndTime}
     SUMMARY:{EventTitle}
-    DESCRIPTION:{}
+    DESCRIPTION:{EventDescription}
     LOCATION:Conference Room A / Zoom
     BEGIN:VALARM
     TRIGGER:-PT30M
