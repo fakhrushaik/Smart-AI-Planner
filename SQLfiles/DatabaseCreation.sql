@@ -27,6 +27,7 @@ CREATE TABLE Events (
 EventID int identity(1,1),
 AccountID int,
 EventTitle varchar(25),
+EventDescription varchar(250),
 EventStartDate date,
 EventEndDate date,
 EventAllDay tinyint,

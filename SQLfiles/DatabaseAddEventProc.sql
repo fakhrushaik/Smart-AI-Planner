@@ -22,10 +22,10 @@ AS
 
 BEGIN TRAN
 
-INSERT INTO Events (AccountID, EventTitle, EventStartDate, EventEndDate, EventAllDay,
+INSERT INTO Events (AccountID, EventTitle, EventDescription, EventStartDate, EventEndDate, EventAllDay,
 EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime,
 EventURL, EventAlert)
-VALUES (@AccountID, @EventTitle, @EventStartDate, @EventEndDate, @EventAllDay,
+VALUES (@AccountID, @EventTitle, @EventDescription, @EventStartDate, @EventEndDate, @EventAllDay,
 @EventStartTime, @EventEndTime, @EventNotes, @EventLocation, @EventRepeat, @EventTravelTime,
 @EventURL, @EventAlert)
 
