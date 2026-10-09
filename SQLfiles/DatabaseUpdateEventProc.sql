@@ -26,7 +26,7 @@ AS
 BEGIN TRAN
 
 UPDATE Events 
-SET AccountID = @AccountID, EventTitle = @EventID, EventStartDate = @EventStartDate, 
+SET AccountID = @AccountID, EventTitle = @EventTitle, EventStartDate = @EventStartDate, 
 EventEndDate = @EventEndDate, EventAllDay = @EventAllDay,
 EventStartTime = @EventStartTime, EventEndTime = @EventEndTime, EventNotes = @EventNotes, 
 EventLocation = @EventLocation, EventRepeat = @EventRepeat, EventTravelTime = @EventTravelTime,
