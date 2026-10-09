@@ -1,0 +1,37 @@
+BEGIN:VCALENDAR
+-- header wrapper
+VERSION:2.0
+-- header wrapper
+PRODID:-//My Calendar Generator//EN
+-- who made the file
+CALSCALE:GREGORIAN
+-- the calendar system being applied (gregorian is default)
+BEGIN:VEVENT
+-- wraps the event specifally 
+UID:20261007T160000Z-123456@example.com
+-- unique identifier for the event
+DTSTAMP:20261007T160000Z
+-- when was the event itself created
+DTSTART:20261115T180000Z
+-- when does the event start
+DTEND:20261115T193000Z
+-- when does the event end
+SUMMARY:Team Project Meeting
+-- title of the calendar event
+DESCRIPTION:Discuss the upcoming project milestones and deliverables.
+-- description for the event
+LOCATION:Conference Room A / Zoom
+-- where does the event take place
+BEGIN:VALARM
+-- alarm wrapper start
+TRIGGER:-PT30M
+-- P is period T is time 30M is 30 minutes before, -P1D is one day before, -PT1H is one hour before
+ACTION:DISPLAY
+-- says to display the alarm as a notification
+DESCRIPTION:Reminder: Team Strategy Meeting
+END:VALARM
+-- alarm wrapper end
+END:VEVENT
+-- end wraps the event
+END:VCALENDAR
+-- end wraps the header
