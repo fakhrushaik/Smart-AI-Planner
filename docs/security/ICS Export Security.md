@@ -9,7 +9,7 @@ The following fields are considered Sensitive and must be protected during ICS e
 - EventURL
 - EventAlert
 - Any academic event details (FERPA)
--  user specific scheduling patterns
+- user specific scheduling patterns
 These fields must be treated as Confidential.
 
 # ICS Export Requirements
@@ -17,9 +17,6 @@ These fields must be treated as Confidential.
     - UID:{UUIDv4}@smartplanner.com
 - DTSTAMP, DTSTART, DTEND Must Use RFC 5545 Format
     - example: DTSTAMP:20261007T160000Z
-- Location Field Restrictions
-    - Location must reflect the actual event location, not hardcoded values.
-    - LOCATION:{SanitizedEventLocation}
 
 # Storage & Transmission Requirements
 ICS files must be stored:
