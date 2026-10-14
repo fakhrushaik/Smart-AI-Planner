@@ -25,6 +25,7 @@ PRIMARY KEY(AccountID)
 -- Events
 CREATE TABLE Events (
 EventID int identity(1,1),
+EventUUID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
 AccountID int,
 EventTitle varchar(25),
 EventDescription varchar(250),
