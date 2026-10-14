@@ -1,14 +1,19 @@
 import sqlite3
 import datetime
+import uuid
 
 #Initialize
 conn = sqlite3.connect("SmartPlanner.db")
 cursor = conn.cursor()
 
+#Handle AcccountID
+AccountID = ""
+
 #Grab rows
-cursor.execute("SELECT EventID, EventTitle, EventStartDate, " \
+cursor.execute("SELECT EventTitle, EventStartDate, " \
 "EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, " \
-"EventRepeat, EventTravelTime, EventURL, EventAlert FROM Events")
+"EventRepeat, EventTravelTime, EventURL, " \
+"EventAlert FROM Events WHERE AccountID = ?", (AccountID,))
 rows = cursor.fetchall()
 
 #Init events list to store events from loop
@@ -16,12 +21,16 @@ ics_eventslist = []
 
 #Loop through each event row and format the event to be stored
 for row in rows:
-    EventID, EventTitle, EventDescription, EventStartDate, EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime, EventURL, EventAlert = row
+    EventTitle, EventDescription, EventStartDate, EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime, EventURL, EventAlert = row
+
+    #Generate unique uuid4 to use for .ics event
+    uuid_object = uuid.uuid4()
+    uuid_string = str(uuid_object)
 
     #Formatting ics text based on template
     ics_event = f"""
     BEGIN:VEVENT
-    UID:{EventID}6@smartplanner.com
+    UID:{uuid_object}6@smartplanner.com
     DTSTAMP:{datetime.now(datetime.UTC)}
     DTSTART:{EventStartTime}
     DTEND:{EventEndTime}
