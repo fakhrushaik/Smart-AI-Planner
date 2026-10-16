@@ -12,6 +12,10 @@ School of Information Technology
 
 This README is a Markdown adaptation of the [original senior design contract](annotated-Senior%20Design%20Contract%20Template%2025-26.pdf). Features, technologies, and milestones below describe the proposed project, not verified implementation status.
 
+## Website preview
+
+The static site is published at [Smart Planner](https://fakhrushaik.github.io/Smart-AI-Planner/). Source lives in `website/`; only that directory is included in the Pages artifact. The preview includes a browser-local planner, accessibility settings, and privacy controls. Accounts, AI, and live calendar sync are future capabilities. See [release notes and verification](docs/website-release.md).
+
 ## Intent
 
 The contract was written and agreed upon by Bonnie Hou, Fakhruddin Shaik, Callie Jacobs, and Bilal Ahmadzai. It provides expectations, objectives, and results for developing the Smart AI Planner and applies to all team members participating in the Senior Design Capstone class series.
