@@ -1,11 +1,9 @@
-import sqlite3
 import datetime
 import icalendar
 import pyodbc
 
 #filepaths
 ics_file_path = ""
-db_filepath = "SmartPlanner.db"
 
 #setup connection to database
 conn = ( r"DRIVER={ODBC Driver 17 for SQL Server};"
@@ -20,7 +18,11 @@ cursor = connection.cursor()
 with open(ics_file_path, 'r', encode='utf-8') as file:
     cal = icalendar.from_ical(file.read())
 
-
+#Set up SQL Insert Query
+insert_query = """
+    INSERT INTO Events (EventUUID, EventTitle, EventDescription, EventLocation, EventStartTime, EventEndTime)
+    VALUES (?, ?, ?, ?, ?, ?)
+"""
 
 #loop through events from ics
 for component in cal.walk():
@@ -28,14 +30,17 @@ for component in cal.walk():
         #format ics file to vars
 
         #Basic information
+        EventUUID = str(component.get('uid'))
         EventTitle = str(component.get('summary', ''))
-        EventLocation = str(component.get('location', ''))
         EventDescription = str(component.get('description', ''))
-        EventUUID = 
+        EventLocation = str(component.get('location', ''))
+        
 
         #Date time TO DO
-        EventStartTime = (component.get('dtstart').dt)
-        EventEndTime = (component.get('dtend').dt)
+        start_dt = (component.get('dtstart').dt)
+        end_dt = (component.get('dtend').dt)
+        EventStartTime = start_dt.dt if start_dt else None
+        EventEndTime = end_dt.dt if end_dt else None
 
         #Reccurring TO DO
 
@@ -46,5 +51,10 @@ for component in cal.walk():
                     trigger = str(subcomponent.get('trigger', ''))
 
         #Insert Event
+        try:
+                cursor.execute(
+                     insert_query,
+                     (EventUUID, EventTitle, EventDescription, EventLocation, EventStartTime, EventEndTime)
+                )
 
 #
