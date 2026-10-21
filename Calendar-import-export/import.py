@@ -5,7 +5,7 @@ import pyodbc
 #filepaths
 ics_file_path = ""
 
-#setup connection to database
+#setup connection to database TO DO
 conn = ( r"DRIVER={ODBC Driver 17 for SQL Server};"
     r"SERVER=your_server_name;"
     r"DATABASE=your_database_name;"
@@ -46,15 +46,18 @@ for component in cal.walk():
 
         #Alarm
         for subcomponent in component.walk():
-                if subcomponent.name == "VALARM":
-                    action = str(subcomponent.get('action', 'DISPLAY'))
-                    trigger = str(subcomponent.get('trigger', ''))
+            if subcomponent.name == "VALARM":
+                action = str(subcomponent.get('action', 'DISPLAY'))
+                trigger = str(subcomponent.get('trigger', ''))
 
         #Insert Event
         try:
-                cursor.execute(
-                     insert_query,
-                     (EventUUID, EventTitle, EventDescription, EventLocation, EventStartTime, EventEndTime)
-                )
+            cursor.execute(
+                    insert_query,
+                    (EventUUID, EventTitle, EventDescription, EventLocation, EventStartTime, EventEndTime),
+            )
+            print(f'Imported: {EventTitle}')
+        except Exception as err:
+            print(f"Failed to import event: {EventTitle}")
 
 #
