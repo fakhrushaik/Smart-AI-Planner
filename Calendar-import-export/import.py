@@ -1,18 +1,26 @@
 import sqlite3
 import datetime
 import icalendar
+import pyodbc
 
 #filepaths
-ics_filepath = ""
+ics_file_path = ""
 db_filepath = "SmartPlanner.db"
 
 #setup connection to database
-conn = sqlite3.connect(db_filepath)
-cursor = conn.cursor()
+conn = ( r"DRIVER={ODBC Driver 17 for SQL Server};"
+    r"SERVER=your_server_name;"
+    r"DATABASE=your_database_name;"
+    r"Trusted_Connection=yes;"
+    )
+connection = pyodbc.connect(conn)
+cursor = connection.cursor()
 
 #read ics file
 with open(ics_file_path, 'r', encode='utf-8') as file:
-    cal = icalendar.from_ical(f.read())
+    cal = icalendar.from_ical(file.read())
+
+
 
 #loop through events from ics
 for component in cal.walk():
