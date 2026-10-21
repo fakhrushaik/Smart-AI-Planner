@@ -6,3 +6,5 @@ TO DO list for import exports
 [] export: Add Reccurring event
 [] import: start work on creation of import script
 [] BOTH: swap from sqlite3 to pyodbc
+
+[]SWAP SYNTAX TO POSTGRESQL FROM T-SQL FOR PROCS AND CREATE
