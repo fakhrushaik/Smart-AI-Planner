@@ -18,8 +18,8 @@ with open(ics_file_path, 'r', encode='utf-8') as file:
 
 #Set up SQL Insert Query
 insert_query = """
-    INSERT INTO Events (EventUUID, EventTitle, EventDescription, EventLocation, EventStartTime, EventEndTime)
-    VALUES (?, ?, ?, ?, ?, ?)
+    INSERT INTO Events (EventUUID, EventTitle, EventDescription, EventLocation, EventStartDate, EventStartTime, EventEndDate, EventEndTime, EventAllDay)
+    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
 """
 
 try:
@@ -29,7 +29,7 @@ try:
 
     #loop through events from ics
     for component in cal.walk():
-        if component.name == 'VENVENT':
+        if component.name == 'VEVENT':
             #format ics file to vars
 
             #Basic information
@@ -39,12 +39,28 @@ try:
             EventLocation = str(component.get('location', ''))
             
 
-            #Date time TO DO
+            #Date time 
             start_dt = (component.get('dtstart').dt)
             end_dt = (component.get('dtend').dt)
-            EventStartTime = start_dt.dt if start_dt else None
-            EventEndTime = end_dt.dt if end_dt else None
 
+            if isinstance(start_dt, datetime.datetime):
+                EventStartDate = start_dt.date().isoformat() #EX: 2026-10-23: Postgres handles iso format
+                EventStartTime = start_dt.time().isoformat() #EX: 11:35:00 or +- offsett: Postgres handles iso format
+                EventAllDay = '0'
+            elif isinstance(start_dt, datetime.date):
+                EventStartDate = start_dt.isoformat() #EX: 2026-10-23: Postgres handles iso format
+                EventStartTime = '00:00:00'
+                EventAllDay = '1'
+
+            if isinstance(end_dt, datetime.datetime):
+                EventEndDate = end_dt.date().isoformat() #EX: 2026-10-23: Postgres handles iso format
+                EventEndTime = end_dt.time().isoformat() #EX: 11:35:00 or +- offsett: Postgres handles iso format
+                EventAllDay = '0'
+            elif isinstance(start_dt, datetime.date):
+                EventEndDate = end_dt.isoformat() #EX: 2026-10-23: Postgres handles iso format
+                EventEndTime = '00:00:00'
+                EventAllDay = '1'
+            
             #Reccurring TO DO
 
             #Alarm
@@ -57,7 +73,7 @@ try:
             try:
                 cursor.execute(
                         insert_query,
-                        (EventUUID, EventTitle, EventDescription, EventLocation, EventStartTime, EventEndTime),
+                        (EventUUID, EventTitle, EventDescription, EventLocation, EventStartDate, EventStartTime, EventEndDate, EventEndTime, EventAllDay),
                 )
                 print(f'Imported: {EventTitle}')
             except Exception as err:
