@@ -27,6 +27,13 @@ This is not a certification of WCAG, Apple App Store, GDPR, CCPA, FERPA, or othe
 
 Meta CSP cannot supply response-only frame-ancestors protection. GitHub Pages response headers are hosting-controlled. There are no remote data inputs, APIs, credentials, tracking scripts, or account sessions in this preview. Browser storage is not an encrypted vault, and other open tabs/exported files retain independent copies.
 
+## Changes October 24, 2026
+
+- Apple Human Interface Guidelines polish: sticky translucent headers, pill buttons, larger card radii, softer depth, system type only, and Dark Mode that respects accessible solid mode.
+- JSON import/restore in Preferences, validated and field-filtered, local only, with a replace confirmation. Privacy notice updated for import.
+- Calendar day + buttons that prefill the event date, and Today tasks sorted by date.
+- Sprint review demo flow added in `docs/sprint-review.md` for October 26, 2026. No new network requests, tracking, remote fonts, or third-party scripts were added.
+
 ## Local development
 
 Run `python3 -m http.server 4173 --directory website`, then visit http://localhost:4173. Use the GitHub Pages project URL to test the custom 404 page's repository-prefixed paths.
