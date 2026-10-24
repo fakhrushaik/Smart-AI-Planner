@@ -2,7 +2,7 @@ import datetime
 import icalendar
 import pyodbc
 
-#filepaths
+#filepaths TO DO
 ics_file_path = ""
 
 #setup connection string to database TO DO
