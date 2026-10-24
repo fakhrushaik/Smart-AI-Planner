@@ -1,6 +1,10 @@
 'use strict';
 (() => {
   const STORAGE = 'smart-planner:data:v1';
+  const SESSION_KEY = 'smart-planner:session:v1';
+  const getSession = () => { try { const s = JSON.parse(sessionStorage.getItem(SESSION_KEY) || 'null'); return s && s.name === 'user' && s.demo === true ? s : null; } catch { return null; } };
+  const saveSession = s => { try { sessionStorage.setItem(SESSION_KEY, JSON.stringify(s)); } catch { /* Session is optional. */ } };
+  const greeting = () => { const h = new Date().getHours(); return h < 12 ? 'Good morning' : h < 18 ? 'Good afternoon' : 'Good evening'; };
   const el = id => document.getElementById(id);
   const categories = { class: ['Class', 'lavender'], focus: ['Focus', 'green'], work: ['Work', 'peach'], personal: ['Personal', 'blue'] };
   const today = new Date();
@@ -45,6 +49,9 @@
   function eventMarkup(event) { return `<article class="schedule-item ${categories[event.category][1]}"><div><h3>${text(event.title)}</h3><p>${event.start}–${event.end} · ${categories[event.category][0]}${event.location ? ' · '+text(event.location) : ''}</p></div><button data-action="edit-event" data-id="${event.id}" aria-label="Edit ${text(event.title)}">Edit</button></article>`; }
   function taskMarkup(task) { return `<div class="task-row"><input type="checkbox" id="task-${task.id}" data-task="${task.id}" ${task.done?'checked':''}><label for="task-${task.id}">${text(task.title)}<small>${formatDate(task.date,{month:'short',day:'numeric'})} · ${categories[task.category][0]}${task.date<dateKey(today)&&!task.done?' · Overdue':''}</small></label><button class="icon-button" data-action="edit-task" data-id="${task.id}" aria-label="Edit ${text(task.title)}">✎</button></div>`; }
   function render() {
+    const session = getSession();
+    const account = el('account-area');
+    if (account) account.innerHTML = session ? `Signed in as <strong>${text(session.name)}</strong> · <button type="button" id="account-sign-out" class="text-link">Sign out</button>` : `<a href="login.html">Sign in</a> · Guest preview`;
     document.querySelectorAll('[data-view]').forEach(link => { if(link.dataset.view===active) link.setAttribute('aria-current','page'); else link.removeAttribute('aria-current'); });
     const names = {today:'Your day',calendar:'Your week',tasks:'Your tasks',settings:'Preferences'};
     document.title = `${names[active]} — Smart Planner`;
@@ -52,7 +59,7 @@
     const tasks = data.tasks.filter(task=>!task.done).sort((a,b)=>a.date.localeCompare(b.date));
     if (active==='today') {
       const minutes = events.reduce((sum,event)=>sum+(Number(event.end.slice(0,2))*60+Number(event.end.slice(3)))-(Number(event.start.slice(0,2))*60+Number(event.start.slice(3))),0);
-      el('view').innerHTML = heading(`A little clarity for your ${today.toLocaleDateString(undefined,{weekday:'long'})}.`,today.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}),eventButton)+`<div class="stats"><div class="stat"><strong>${events.length}</strong><span>events today</span></div><div class="stat"><strong>${Math.floor(minutes/60)}h ${minutes%60}m</strong><span>scheduled today</span></div><div class="stat"><strong>${tasks.length}</strong><span>tasks to work on</span></div></div><div class="dashboard-grid"><section class="panel"><div class="panel-heading"><h2>Your day</h2><a href="#calendar">See your week ↗</a></div>${events.length?events.map(eventMarkup).join(''):'<div class="empty">A fresh page for your day.<br>Add your first event when you’re ready.</div>'}</section><div><section class="callout"><h2>A little breathing room.</h2><p>You don't need to fill every hour. Leave some space for yourself, too.</p></section><section class="panel"><div class="panel-heading"><h2>One thing at a time.</h2><a href="#tasks">All tasks ↗</a></div>${tasks.length?tasks.slice(0,3).map(taskMarkup).join(''):'<p>No unfinished tasks. Enjoy the space.</p>'}<button class="button secondary small" data-action="add-task">+ Add task</button></section></div></div><section class="callout"><h2>Your plans, your choice.</h2><p>${saving?'Device saving is on.':'Plans stay in this tab until you choose to save them.'} No accounts, live calendar connections, reminders, or AI requests are active in this preview. <a href="#settings">Manage your data</a>.</p></section>`;
+      el('view').innerHTML = heading(`A little clarity for your ${today.toLocaleDateString(undefined,{weekday:'long'})}.`,today.toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'}),eventButton)+`${session && session.welcome ? `<section class="welcome" role="status"><div><strong>${greeting()}, ${text(session.name)}.</strong><span>Welcome back — here is your day at a glance.</span></div><button class="icon-button" data-action="dismiss-welcome" aria-label="Dismiss welcome">×</button></section>` : ''}<div class="stats"><div class="stat"><strong>${events.length}</strong><span>events today</span></div><div class="stat"><strong>${Math.floor(minutes/60)}h ${minutes%60}m</strong><span>scheduled today</span></div><div class="stat"><strong>${tasks.length}</strong><span>tasks to work on</span></div></div><div class="dashboard-grid"><section class="panel"><div class="panel-heading"><h2>Your day</h2><a href="#calendar">See your week ↗</a></div>${events.length?events.map(eventMarkup).join(''):'<div class="empty">A fresh page for your day.<br>Add your first event when you’re ready.</div>'}</section><div><section class="callout"><h2>A little breathing room.</h2><p>You don't need to fill every hour. Leave some space for yourself, too.</p></section><section class="panel"><div class="panel-heading"><h2>One thing at a time.</h2><a href="#tasks">All tasks ↗</a></div>${tasks.length?tasks.slice(0,3).map(taskMarkup).join(''):'<p>No unfinished tasks. Enjoy the space.</p>'}<button class="button secondary small" data-action="add-task">+ Add task</button></section></div></div><section class="callout"><h2>Your plans, your choice.</h2><p>${saving?'Device saving is on.':'Plans stay in this tab until you choose to save them.'} No accounts, live calendar connections, reminders, or AI requests are active in this preview. <a href="#settings">Manage your data</a>.</p></section>`;
     } else if(active==='tasks') {
       el('view').innerHTML=heading('One thing at a time.','Small steps still move you forward.','<button class="button" data-action="add-task">+ Add task</button>')+'<div class="toolbar"><label class="sr-only" for="task-search">Search tasks</label><input id="task-search" type="search" placeholder="Find a task…" maxlength="120"><label class="sr-only" for="task-filter">Filter tasks</label><select id="task-filter"><option value="all">All tasks</option><option value="open">To do</option><option value="done">Completed</option></select></div><section class="panel" aria-label="Task list"><div id="task-list"></div></section>';
       renderTasks();
@@ -113,6 +120,7 @@
     const button=event.target.closest('[data-action]');if(!button)return;const action=button.dataset.action;
     if(action==='add-event'||action==='add-task')openEditor(action==='add-event'?'event':'task');
     else if(action==='add-event-date')openEditor('event',null,button.dataset.date);
+    else if(action==='dismiss-welcome'){const s=getSession();if(s){s.welcome=false;saveSession(s);}render();}
     else if(action==='edit-event'||action==='edit-task')openEditor(action==='edit-event'?'event':'task',button.dataset.id);
     else if(['prev-week','next-week','this-week'].includes(action)){weekOffset=action==='this-week'?0:weekOffset+(action==='prev-week'?-1:1);render();el('week-label').focus();}
     else if(action==='export'){download(JSON.stringify(data,null,2),'application/json','smart-planner.json');announce('Planner exported. Keep this file somewhere private.');}
@@ -143,5 +151,7 @@
   });
   window.addEventListener('storage',event=>{if(event.key===STORAGE)announce('Planner storage changed in another tab. This tab still has its current plans. Reload to use the saved version, or export before making more changes.');});
   function navigate(focus=false){active=['today','calendar','tasks','settings'].includes(location.hash.slice(1))?location.hash.slice(1):'today';render();if(focus)el('main').focus();}
+  const accountArea = el('account-area');
+  if (accountArea) accountArea.addEventListener('click', event => { const b = event.target.closest('#account-sign-out'); if (!b) return; try { sessionStorage.removeItem(SESSION_KEY); } catch { /* Ignore. */ } render(); announce('Signed out. You are viewing the guest preview.'); });
   window.addEventListener('hashchange',()=>navigate(true));navigate();if(initialMessage)announce(initialMessage);
 })();

@@ -2,6 +2,10 @@
 
 Five-minute demo flow for the project advisor. This is a student preview, not a production service.
 
+## 0. Sign in first (1 minute)
+
+Open `login.html`. Show Apple and Google as disabled "Coming soon" buttons — do not pretend they work. Sign in with the team demo account, username `user`, password `password`, and show the animated welcome: "Good morning / afternoon / evening, user." Note out loud that this is a local demo only, not real security, and that Supabase Auth will replace it. Or use "Continue as guest" to show the planner without signing in.
+
 ## 1. Home (30 seconds)
 
 Open `index.html`. Note the calm, pastel look, the day-at-a-glance card, and the plain statement: no account, no tracking, everything stays in this browser.

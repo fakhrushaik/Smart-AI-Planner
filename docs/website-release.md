@@ -27,6 +27,14 @@ This is not a certification of WCAG, Apple App Store, GDPR, CCPA, FERPA, or othe
 
 Meta CSP cannot supply response-only frame-ancestors protection. GitHub Pages response headers are hosting-controlled. There are no remote data inputs, APIs, credentials, tracking scripts, or account sessions in this preview. Browser storage is not an encrypted vault, and other open tabs/exported files retain independent copies.
 
+## Changes October 24, 2026 — login, dark mode, animations
+
+- New `website/login.html` with a local demo sign-in (team demo: user / password, tab session only), a personalised animated welcome in the planner, sign-out, and a guest preview path. Apple and Google buttons are disabled and labelled "Coming soon" — they are not connected.
+- Dark Mode fixed: deep-purple primary buttons with white text, dark translucent top bar, darker readable category chips, and readable errors and delete buttons. Solid mode still overrides Dark Mode.
+- Calm animations for the hero, feature cards, login card, and welcome banner, all disabled for reduced motion and for solid mode.
+- Honest roadmap section on the home page: Available now / Demo / Coming soon. Privacy notice updated for demo sign-in.
+- Supabase prompts for ChatGPT in `docs/supabase-prompts.md` and a test checklist in `docs/test-checklist.md`. No new network requests were added.
+
 ## Changes October 24, 2026
 
 - Apple Human Interface Guidelines polish: sticky translucent headers, pill buttons, larger card radii, softer depth, system type only, and Dark Mode that respects accessible solid mode.
