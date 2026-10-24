@@ -5,6 +5,6 @@ TO DO list for import exports
 [] export: Get the AccountID from where it is going to be passed in from the website (need to figure out how we are going to do that)
 [] export: Add Reccurring event
 [X] import: start work on creation of import script
-[] BOTH: swap from sqlite3 to pyodbc
+[X] BOTH: swap from sqlite3 to pyodbc
 
 []SWAP SYNTAX TO POSTGRESQL FROM T-SQL FOR PROCS AND CREATE
