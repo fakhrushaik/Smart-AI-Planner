@@ -6,7 +6,7 @@ Copy one prompt at a time into ChatGPT. ChatGPT is already connected to this Git
 
 - Repo: fakhrushaik/Smart-AI-Planner. Only `website/` is published by GitHub Pages. There is no build step, no bundler, and no backend yet.
 - Front end: plain HTML, CSS, and JavaScript in `website/` (`index.html`, `login.html`, `planner.html`, `planner.js`, `login.js`, `preferences.js`, `styles.css`). No remote fonts, trackers, or third-party scripts today, and the Content Security Policy blocks external connections.
-- Current login is a local demo only: username `user`, password `password`, checked in the browser, stored only as a tab session. It is not security and must be removed when real auth lands.
+- Current login is a local demo only: a hardcoded demo account, checked in the browser, stored only as a tab session. It is not security and must be removed when real auth lands.
 - Planner data today: events (title, date, start, end, category, location) and tasks (title, date, category, done), stored in the browser only, with JSON and .ics export and JSON import.
 - Rules: do not claim Apple, Google, WCAG, GDPR, CCPA, or FERPA compliance. Do not store passwords, health records, financial data, or student records. Do not put a Supabase service-role key, or any secret, in front-end code or in the repo.
 
@@ -27,7 +27,7 @@ Copy one prompt at a time into ChatGPT. ChatGPT is already connected to this Git
 
 > Replace the demo login in `website/login.html` and `website/login.js` with real Supabase Auth, keeping the same calm Apple-style look and the same pages.
 >
-> 1. Remove the hardcoded demo account (`user` / `password`) completely. No demo password may remain in code, comments, or docs.
+> 1. Remove the hardcoded demo account (the former hardcoded account) completely. No demo password may remain in code, comments, or docs.
 > 2. Wire up email/password sign-in and sign-up, password reset, sign-out, and a session check on `planner.html` that redirects signed-out users to `login.html`.
 > 3. Wire up the Apple and Google buttons so they actually start Supabase OAuth and handle the callback, instead of being disabled "Coming soon" buttons.
 > 4. Keep the welcome greeting after sign-in, using the signed-in user's display name or email, with the same gentle animation, and respect `prefers-reduced-motion`.

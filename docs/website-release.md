@@ -1,51 +1,35 @@
-# Static website release
+# Supabase account preview — October 26, 2026
 
-The `website/` directory implements the supplied Smart AI Planner PNG as a responsive static website. The GitHub Actions Pages workflow publishes only that directory; SQL files, project contracts, and other repository files are not included in the website artifact.
+This branch replaces the browser-checked demo login with Supabase email/password authentication. Apple and Google remain on hold. Only `website/` is published by the Pages workflow; pushing this branch does not deploy main.
 
-## Working features
+## Implemented
 
-- Landing, about, privacy, accessibility, terms, and custom 404 pages.
-- Event creation/editing/deletion with date and time validation, overlap notice, weekly calendar.
-- Tasks with completion, search, filtering, and editing.
-- Memory-only planner by default, opt-in local storage, JSON and iCalendar exports, deletion confirmation.
-- Solid display mode, semantic controls, visible keyboard focus, no animations, reduced-motion and contrast media queries.
+Email signup/sign-in, PKCE confirmation/recovery handling, global sign-out, account-route guard, and a personalized greeting. Sessions use tab storage (memory fallback if unavailable); observed access-token lifetime is 3,600 seconds. Sign-out revokes refresh sessions; issued access tokens can outlive sign-out until expiry.
 
-Accounts, AI, live calendar synchronization, push notifications, widgets, and native Apple apps are not implemented or simulated as connected services. JSON export is not an import/restore feature. iCalendar times are floating local times; users must check the destination calendar timezone.
+Signed-in profiles, events and tasks use Supabase with ownership RLS. Snapshot writes are transactional and revision checked. Direct mutations also enforce per-user limits. Local demo remains available without an account. Local migration and JSON replacement require confirmation. Failed saves retain edits and show retry/export/reload controls. Account deletion requires a live session and removes the caller's plans, profile and auth account.
 
-## Verification performed (October 16, 2026)
+Login spacing, button alignment, responsive wrapping and empty-status spacing were improved. Existing solid mode, dark mode and reduced-motion support remain. Fictional sample week and first-run guidance are included.
 
-- JavaScript syntax checks (`node --check`) passed for both scripts.
-- Local HTML asset/link and duplicate-ID checks passed for all seven HTML pages.
-- Browser checks: event creation, invalid end-time rejection, task creation/completion, task search, save/reload persistence, turning saving off/reload, JSON download contents, iCalendar download contents, and solid-mode toggle.
-- Calendar at 375px viewport: document width and scroll width both 375px; vertically stacked days.
-- Codex Security scoped static review covers `website/`; its canonical report is retained by the plugin rather than published with the website.
-- Workflow action commit pins verified against GitHub tag references. Deployment grants contents-read plus Pages-write and OIDC only to its deploy job.
+## Verified
 
-## Remaining validation and limits
+- Four automated data-validation/escaping tests pass; JavaScript syntax and whitespace checks pass.
+- Applied migration and SQL isolation tests: own operations, cross-user read/write/delete denial, owner reassignment denial, stale revision rejection and anonymous denial.
+- Live APIs: invalid credentials rejected; anonymous table access denied; confirmed disposable fixture can sign in, create profile, save/reload events/tasks and complete a task. Authenticated account deletion succeeded and subsequent sign-in was denied. Fixture cleanup completed.
+- A live API stale-save assertion did not return the expected error code; SQL stale-revision test passes. Browser conflict/retry behavior needs further review before production. Do not describe the full API test as passing.
+- Local browser: signed-out account guard redirects, signup form fields, guest planner/sample calendar and dark login alignment inspected.
+- Existing production guest preview: sample plans, device-save/reload, event edits and invalid-time validation, task create/complete/search, calendar, export controls and solid mode checked.
+- Codex Security scan `43e783a2-04d1-4612-9d49-9c2927494e8d` completed with no reported findings across its 16-source-file inventory. It covers the original snapshot, not later layout/copy edits; full upstream SDK audit excluded. This is not a security certification.
 
-This is not a certification of WCAG, Apple App Store, GDPR, CCPA, FERPA, or other legal compliance. Real-device Safari, iPadOS, VoiceOver, user testing, a full accessibility audit, and jurisdiction-specific legal review remain necessary for a production service. A dedicated origin is recommended before handling sensitive plans because GitHub project sites on one hostname share localStorage authority.
+## Remaining setup and release gates
 
-Meta CSP cannot supply response-only frame-ancestors protection. GitHub Pages response headers are hosting-controlled. There are no remote data inputs, APIs, credentials, tracking scripts, or account sessions in this preview. Browser storage is not an encrypted vault, and other open tabs/exported files retain independent copies.
+Email confirmation remains enabled by the owner's choice. **Custom SMTP is not configured. External reviewers cannot reliably complete email signup or password recovery until mail delivery is configured.** Use confirmed authorized test accounts or local demo for review. No email verification bypass was enabled.
 
-## Changes October 24, 2026 — login, dark mode, animations
+Supabase's leaked-password protection warning remains: this feature requires a paid plan. Minimum password length is 12; secure email/password change are enabled. Exact redirect URLs and provider setup are in [supabase-setup.md](supabase-setup.md).
 
-- New `website/login.html` with a local demo sign-in (team demo: user / password, tab session only), a personalised animated welcome in the planner, sign-out, and a guest preview path. Apple and Google buttons are disabled and labelled "Coming soon" — they are not connected.
-- Dark Mode fixed: deep-purple primary buttons with white text, dark translucent top bar, darker readable category chips, and readable errors and delete buttons. Solid mode still overrides Dark Mode.
-- Calm animations for the hero, feature cards, login card, and welcome banner, all disabled for reduced motion and for solid mode.
-- Honest roadmap section on the home page: Available now / Demo / Coming soon. Privacy notice updated for demo sign-in.
-- Supabase prompts for ChatGPT in `docs/supabase-prompts.md` and a test checklist in `docs/test-checklist.md`. No new network requests were added.
+Google/Apple, real-device iPadOS/VoiceOver, full keyboard/200% checks, email confirmation/recovery delivery, and production rollout still require validation. No WCAG, Apple, GDPR, CCPA or FERPA certification is claimed. Browser storage shares the GitHub hostname origin; use a dedicated origin before sensitive production data. Exported files, other tabs and provider backups/logs are separate from app deletion.
 
-## Changes October 24, 2026
+## Development and deployment
 
-- Apple Human Interface Guidelines polish: sticky translucent headers, pill buttons, larger card radii, softer depth, system type only, and Dark Mode that respects accessible solid mode.
-- JSON import/restore in Preferences, validated and field-filtered, local only, with a replace confirmation. Privacy notice updated for import.
-- Calendar day + buttons that prefill the event date, and Today tasks sorted by date.
-- Sprint review demo flow added in `docs/sprint-review.md` for October 26, 2026. No new network requests, tracking, remote fonts, or third-party scripts were added.
+Run `npm ci && npm test`. The pinned Supabase SDK is locally bundled with `npm run vendor`; commit the bundle and lockfile. Serve with `python3 -m http.server 4173 --directory website`. Public URL/key live in `website/config.js`; never commit service-role, SMTP, OAuth or database secrets.
 
-## Local development
-
-Run `python3 -m http.server 4173 --directory website`, then visit http://localhost:4173. Use the GitHub Pages project URL to test the custom 404 page's repository-prefixed paths.
-
-## Deployment
-
-`.github/workflows/pages.yml` uploads only `website/` and deploys to GitHub Pages after relevant pushes to `main`, or through a manual workflow dispatch. No build or runtime package dependencies are required. Do not put secrets or private data under `website/`.
+Review and merge into main only after intended release checks pass. Pages deploys `website/` on main changes. See [test-checklist.md](test-checklist.md) and [sprint-review.md](sprint-review.md).

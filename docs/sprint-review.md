@@ -1,43 +1,14 @@
 # Sprint review — Monday, October 26, 2026
 
-Five-minute demo flow for the project advisor. This is a student preview, not a production service.
+Use fictional plans. This branch is an account preview for review, not a claim of production readiness. The existing public site changes only after the PR is merged.
 
-## 0. Sign in first (1 minute)
+1. **Home, 30 seconds:** show who this is for, the local/account distinction, and the honest feature status cards.
+2. **Local demo, 90 seconds:** choose “Try local demo,” visit Preferences, add the example student week, and open Calendar. The labeled examples cover classes, a café shift, a lab deadline and downtime.
+3. **Editing, 60 seconds:** add an event using a day's + button, try an invalid end time, then correct it. Add and complete a task. Search/filter the task list.
+4. **Data controls, 60 seconds:** export JSON and calendar files, import JSON with confirmation, and show deletion confirmation. Local saving is optional. Signed-in saves go to Supabase; failed saves say “Not saved” and provide retry/export/reload options.
+5. **Account preview, 60 seconds:** use a separately prepared, confirmed test account. Show the personalized greeting and save/reload persistence. Sign out and show that the account route returns to login. Never show credentials on a slide or commit them.
+6. **Limits, 30 seconds:** Apple/Google await owner credentials; AI, live calendar connections and notifications are planned. Explain that a static website is not an approved native Apple app, and accessibility/privacy review is still required.
 
-Open `login.html`. Show Apple and Google as disabled "Coming soon" buttons — do not pretend they work. Sign in with the team demo account, username `user`, password `password`, and show the animated welcome: "Good morning / afternoon / evening, user." Note out loud that this is a local demo only, not real security, and that Supabase Auth will replace it. Or use "Continue as guest" to show the planner without signing in.
+If email delivery or account setup is not ready, demonstrate the explicitly labeled local mode and show the database isolation test results. Do not present an untested account flow as passing.
 
-## 1. Home (30 seconds)
-
-Open `index.html`. Note the calm, pastel look, the day-at-a-glance card, and the plain statement: no account, no tracking, everything stays in this browser.
-
-## 2. Sample day (1 minute)
-
-Open the planner, go to Preferences, and choose "Add sample plans." Return to Today: three events, scheduled time, and tasks to work on appear, with overdue tasks sorted first.
-
-## 3. Make it work (2 minutes)
-
-- Add an event from a calendar day using the + button on that day; the date is already filled in.
-- Edit it, then try an end time before the start time to show validation and the overlap notice.
-- Complete a task, search and filter tasks, and move a week forward and back.
-
-## 4. Data control (1 minute)
-
-In Preferences: export JSON, export a calendar (.ics) file, import a previously exported JSON file, and delete planner data with confirmation. Device saving is off by default and opt-in only.
-
-## 5. Privacy and limits — say these out loud
-
-- No accounts, AI requests, live calendar sync, push notifications, tracking scripts, remote fonts, or third-party scripts are active in this preview.
-- Browser storage is not an encrypted vault. Do not enter passwords, health records, financial information, or other confidential student records.
-- This preview does not claim WCAG certification, Apple App Store approval, or GDPR, CCPA, or FERPA compliance. Real-device Safari, VoiceOver, and a full accessibility audit remain to be done before any production use.
-- A dedicated origin is recommended before handling sensitive plans, because GitHub project sites on one hostname share localStorage authority.
-
-## What changed October 24, 2026
-
-- Apple Human Interface Guidelines polish: sticky translucent headers, pill buttons, larger card radii, softer depth, system type only, and Dark Mode that respects the existing accessible solid mode.
-- JSON import/restore with validation and field filtering, local only, with a replace confirmation.
-- Calendar day + buttons that prefill the event date, and Today tasks sorted by date so overdue work is not buried.
-- Privacy notice updated for import. No new network requests were added.
-
-## Local run
-
-Run `python3 -m http.server 4173 --directory website`, then visit http://localhost:4173.
+Local run: `python3 -m http.server 4173 --directory website`, then visit `http://localhost:4173`. See [setup](supabase-setup.md), [release evidence](website-release.md), and [manual checklist](test-checklist.md).

@@ -1,0 +1,8 @@
+import test from 'node:test';
+import assert from 'node:assert/strict';
+import {validData,normalize,validDate,escapeHTML,escapeICS} from '../website/data.js';
+const fixture=()=>({version:1,events:[{id:'legacy-id',title:'Lab',date:'2026-10-26',start:'09:00',end:'10:00',category:'class',location:''}],tasks:[{id:'task-one',title:'Read',date:'2026-10-27',category:'focus',done:false}]});
+test('validates real calendar dates and time ordering',()=>{assert.equal(validDate('2026-02-30'),false);assert.equal(validDate('2028-02-29'),true);const x=fixture();x.events[0].end='08:00';assert.equal(validData(x),false);});
+test('rejects duplicate ids, control characters, invalid categories and oversized imports',()=>{const x=fixture();x.tasks[0].id=x.events[0].id;assert.equal(validData(x),false);x.tasks[0].id='task-one';x.events[0].title='a\rB';assert.equal(validData(x),false);x.events[0].title='ok';x.events[0].category='__proto__';assert.equal(validData(x),false);x.events=[];x.tasks=Array.from({length:1001},(_,i)=>({...x.tasks[0],id:`task-${i}`}));assert.equal(validData(x),false);});
+test('imports whitelist fields and regenerate ids for cloud ownership',()=>{const x=fixture();x.events[0].user_id='other-user';x.secret='ignored';const y=normalize(x,{newIds:true});assert.equal(y.secret,undefined);assert.equal(y.events[0].user_id,undefined);assert.match(y.events[0].id,/^[a-f0-9-]{36}$/);assert.notEqual(y.events[0].id,x.events[0].id);});
+test('rendered strings and calendar text cannot add markup or calendar properties',()=>{assert.equal(escapeHTML('<img onerror="x">'), '&lt;img onerror=&quot;x&quot;&gt;');assert.equal(escapeICS('A\rBEGIN:VEVENT\nB,C;D'), 'A\\nBEGIN:VEVENT\\nB\\,C\\;D');});
