@@ -1,51 +1,43 @@
-# Test checklist — login, dark mode, animations
+# Pre-release test checklist
 
-Run this locally before the sprint review. Local run: `python3 -m http.server 4173 --directory website`, then visit http://localhost:4173.
+Use two disposable, confirmed accounts and fictional plans. Check off only observed results; this list is not a record that every check passed.
 
-## As a senior developer
+## Authentication and isolation
 
-- [ ] `node --check website/login.js` and `node --check website/planner.js` pass.
-- [ ] No new network request: Content Security Policy still has `connect-src 'none'` in the preview, and no remote font, script, or tracker was added.
-- [ ] No secret in the repo: search for `password` outside the clearly labelled demo callout and login demo code, and for any Supabase key. There must be none.
-- [ ] Login demo is local only: `sessionStorage`, not `localStorage`, and sign-out clears it. Planner data is still browser-local unless device saving is turned on.
-- [ ] Dark Mode does not break solid mode: turn solid mode on, then switch the system to dark. Solid mode must stay light and solid.
+- [ ] Sign up and open the confirmation in the requesting tab; sign in successfully.
+- [ ] Wrong password displays an accessible error; signed-out account route redirects to login.
+- [ ] Request reset, open it in the requesting tab, change password, then sign in with the new password. Test expired/different-tab links.
+- [ ] Sign out; refresh and back navigation must not reveal account plans.
+- [ ] Create/edit/complete/delete, reload, then verify on another device.
+- [ ] Sign in as account B: none of account A's plans appear.
+- [ ] Export before testing account deletion. Verify the account and plans are removed and refresh tokens no longer work.
+- [ ] After provider setup, test Apple and Google success, cancellation, hidden email, and sign-out.
 
-## As a rigorous tester
+## Failure and data handling
 
-Login:
-- [ ] Wrong username or password shows a clear error and does not redirect.
-- [ ] Empty username or password shows a clear error.
-- [ ] `user` / `password` redirects to `planner.html#today` and shows "Good morning / afternoon / evening, user."
-- [ ] Dismissing the welcome banner hides it. Signing out shows "Guest preview" in the top bar.
-- [ ] Apple and Google buttons are disabled, say "Coming soon", and do nothing when clicked.
-- [ ] Show password toggles the field and updates its label. Keyboard Tab order goes username → password → Sign in.
-- [ ] Guest link from login and from the home page still opens the planner without signing in.
+- [ ] Offline save shows “Not saved,” retains edits for export, and retries after reconnecting.
+- [ ] Two tabs with the same account: stale revision rejects overwrite. Export before reloading.
+- [ ] Local migration requires confirmation; failed save retains the local copy; retry does not duplicate it.
+- [ ] Valid ICS round trip: export a calendar file, then import it into a clean planner. New events appear; duplicates are skipped and counted; all-day and invalid events are skipped, not silently changed.
+- [ ] Calendar (.ics) exports contain only intended event fields; inspect floating time zone behavior. Tasks are not in .ics files, and Preferences offers ICS import/export only.
+- [ ] 1,000-item limits, invalid dates, reversed times and overlap notices behave correctly.
 
-Dark Mode:
-- [ ] System dark: background is near-black, body text is readable, primary buttons are deep purple with white text (not pastel), top bar is dark and translucent, and category chips are readable.
-- [ ] System light: no regression — pastel chips, purple buttons, and paper background look as before.
-- [ ] Form errors and Delete buttons are readable in both modes.
+## Safari, iPadOS and accessibility
 
-Animations:
-- [ ] Home hero and feature cards rise gently on load. Planner welcome rises once after sign-in.
-- [ ] With system Reduce Motion on, no rise, hover lift, or transition animation plays.
-- [ ] With solid mode on, hero, feature, welcome, and login animations are off.
-- [ ] No flashing, auto-play, or animation that blocks reading or clicking.
+- [ ] Safari on macOS: complete all core flows with keyboard only. Visible focus, logical order, Escape closes dialogs, focus returns sensibly.
+- [ ] VoiceOver on macOS and iPad: labels, headings, status/error announcements, date/time controls and modal focus work.
+- [ ] At 200% text/zoom: no clipped content or unreachable controls. Test narrow portrait and landscape iPad layouts, touch and external keyboard.
+- [ ] Light/Dark Mode: readable text, fields, errors, category labels and focus. Solid mode remains readable in both. Specifically check callout text, welcome text, and the skip link in Dark Mode — callout text was 1.1:1 before this fix.
+- [ ] Reduce Motion and solid mode suppress decorative animation; no flashing or autoplay.
+- [ ] Touch controls have adequate target sizes; do not rely on color alone.
+- [ ] Privacy/terms accurately match storage, providers, retention and account deletion.
 
-Planner regression:
-- [ ] Add event from a calendar day prefill its date. End before start is rejected. Overlap shows a notice.
-- [ ] Task complete, search, filter, week navigation, sample day, JSON export, .ics export, JSON import, and delete with confirmation still work.
+## Release
 
-## As a potential consumer
+- [ ] Run `npm ci`, `npm test`, `npm run vendor`, syntax checks and `git diff --check`.
+- [ ] Run `tests/rls.sql` against the intended project; it rolls back its fixtures.
+- [ ] Check Supabase security advisors and all changed files for secrets.
+- [ ] Complete SMTP and provider setup or explicitly retain pending labels.
+- [ ] Review the PR; merge only when the intended release scope passes. Verify Pages deployment and production callbacks afterward.
 
-- [ ] In 30 seconds I can tell: what the app does, that sign-in is a demo, that Apple/Google are coming soon, and that my plans stay in this browser.
-- [ ] I am never asked for a real Apple, Google, university, or email password.
-- [ ] The home page status section is honest: Available now / Demo / Coming soon, with no fake testimonials, ratings, or AI claims.
-- [ ] Privacy page explains demo sign-in, local storage, exports, and that browser storage is not an encrypted vault.
-- [ ] On a phone (375px) the login card, header, and planner top bar do not overflow, and buttons are at least 44px tall.
-
-## Known limits — say these in the review
-
-- Demo login is not security. Anyone can use `user` / `password` on the public preview.
-- No real accounts, sync, AI, reminders, or Apple/Google sign-in yet. Those need Supabase (see `docs/supabase-prompts.md`).
-- No WCAG, Apple, GDPR, CCPA, or FERPA certification is claimed. Real-device Safari, VoiceOver, and a privacy review are still needed.
+No WCAG certification, Apple approval, GDPR, CCPA or FERPA compliance is asserted. Real-device and legal/privacy reviews remain separate release requirements.

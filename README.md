@@ -14,7 +14,7 @@ This README is a Markdown adaptation of the [original senior design contract](an
 
 ## Website preview
 
-The static site is published at [Smart Planner](https://fakhrushaik.github.io/Smart-AI-Planner/). Source lives in `website/`; only that directory is included in the Pages artifact. The preview includes a browser-local planner, accessibility settings, and privacy controls. Accounts, AI, and live calendar sync are future capabilities. See [release notes and verification](docs/website-release.md).
+The static site is published at [Smart Planner](https://fakhrushaik.github.io/Smart-AI-Planner/). Source lives in `website/`; only that directory is included in the Pages artifact. The published preview includes a browser-local planner, accessibility settings, and privacy controls. The account-preview branch adds Supabase authentication and per-user planner storage; it is pending review and merge. AI and live calendar connections remain planned. See [release notes and verification](docs/website-release.md).
 
 ## Intent
 
