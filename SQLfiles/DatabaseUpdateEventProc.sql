@@ -27,12 +27,12 @@ AS $$
 
 BEGIN
 UPDATE Events 
-SET AccountID = p_AccountID, EventTitle = p_EventTitle, EventDescription = p_EventDescription, EventStartDate = p_EventStartDate, 
+SET EventTitle = p_EventTitle, EventDescription = p_EventDescription, EventStartDate = p_EventStartDate, 
 EventEndDate = p_EventEndDate, EventAllDay = p_EventAllDay,
 EventStartTime = p_EventStartTime, EventEndTime = p_EventEndTime, EventNotes = p_EventNotes, 
 EventLocation = p_EventLocation, EventRepeat = p_EventRepeat, EventTravelTime = p_EventTravelTime,
 EventURL = p_EventURL, EventAlert = p_EventAlert
-WHERE EventID = p_EventID;
+WHERE EventID = p_EventID AND AccountID = p_AccountID;
 
 END;
 $$;
