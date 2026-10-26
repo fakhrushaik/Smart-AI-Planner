@@ -18,23 +18,33 @@ PRIMARY KEY(AccountID)
 
 -- Events
 CREATE TABLE Events (
-EventID SERIAL,
-EventUUID UUUID DEFAULT gen_random_uuid(),
-AccountID int,
-EventTitle varchar(25),
-EventDescription varchar(250),
-EventStartDate date,
-EventEndDate date,
-EventAllDay SMALLINT,
-EventStartTime time,
-EventEndTime time,
-EventNotes varchar(100),
-EventLocation varchar(100),
-EventRepeat varchar(25),
-EventTravelTime varchar(25),
-EventURL varchar(75),
-EventAlert varchar(25),
-PRIMARY KEY(EventID),
-CONSTRAINT uq_event_uuid UNIQUE (EventUUID),
-FOREIGN KEY(AccountID) REFERENCES Accounts(AccountID)
+    EventID SERIAL,
+    EventUUID UUUID DEFAULT gen_random_uuid(),
+    AccountID int,
+    EventTitle varchar(25),
+    EventDescription varchar(250),
+    EventStartDate date,
+    EventEndDate date,
+    EventAllDay SMALLINT,
+    EventStartTime time,
+    EventEndTime time,
+    EventNotes varchar(100),
+    EventLocation varchar(100),
+    EventRepeat varchar(25),
+    EventTravelTime varchar(25),
+    EventURL varchar(75),
+    EventAlert varchar(25),
+    PRIMARY KEY(EventID),
+    CONSTRAINT uq_event_uuid UNIQUE (EventUUID),
+    FOREIGN KEY(AccountID) REFERENCES Accounts(AccountID)
+)
+
+CREATE TABLE Tasks (
+    TaskID SERIAL,
+    TaskTitle varchar(25),
+    TaskDate date,
+    TaskCategory varchar(25),
+    TaskComplete boolean,
+    PRIMARY KEY(TaskID),
+    FOREIGN KEY(AccountID) REFERENCES Accounts(AccountID)
 )
