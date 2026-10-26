@@ -42,6 +42,7 @@ CREATE TABLE Events (
 -- Tasks
 CREATE TABLE Tasks (
     TaskID SERIAL,
+    AccountID int,
     TaskTitle varchar(25),
     TaskDate date,
     TaskCategory varchar(25),
