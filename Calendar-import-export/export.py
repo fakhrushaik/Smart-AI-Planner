@@ -30,15 +30,24 @@ try:
     for row in rows:
         EventUUID, EventTitle, EventDescription, EventStartDate, EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime, EventURL, EventAlert = row
 
-        #Format Date-time TO DO
+        #Format Date-time
+        if isinstance(EventStartTime, str):
+            # Fallback if SQL driver returns time as a string (e.g., "14:30:00")
+            EventStartTime = datetime.datetime.strptime(EventStartTime.split(".")[0], "%H:%M:%S").time()
+        EventStartDT = datetime.datetime.combine(EventStartDate, EventStartTime)
+
+        if isinstance(EventEndTime, str):
+            # Fallback if SQL driver returns time as a string (e.g., "14:30:00")
+            EventStartTime = datetime.datetime.strptime(EventEndTime.split(".")[0], "%H:%M:%S").time()
+        EventEndDT = datetime.datetime.combine(EventEndDate, EventEndTime)
 
         #Formatting ics text based on template
         ics_event = f"""
         BEGIN:VEVENT
         UID:{EventUUID}6@smartplanner.com
         DTSTAMP:{datetime.now(datetime.UTC)}
-        DTSTART:{EventStartTime}
-        DTEND:{EventEndTime}
+        DTSTART:{EventStartDT}
+        DTEND:{EventEndDT}
         SUMMARY:{EventTitle}
         DESCRIPTION:{EventDescription}
         LOCATION:{EventLocation}

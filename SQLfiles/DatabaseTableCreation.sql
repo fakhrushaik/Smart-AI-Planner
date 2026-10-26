@@ -19,7 +19,7 @@ PRIMARY KEY(AccountID)
 -- Events
 CREATE TABLE Events (
     EventID SERIAL,
-    EventUUID UUUID DEFAULT gen_random_uuid(),
+    EventUUID UUID DEFAULT gen_random_uuid(),
     AccountID int,
     EventTitle varchar(25),
     EventDescription varchar(250),
@@ -39,6 +39,7 @@ CREATE TABLE Events (
     FOREIGN KEY(AccountID) REFERENCES Accounts(AccountID)
 )
 
+-- Tasks
 CREATE TABLE Tasks (
     TaskID SERIAL,
     TaskTitle varchar(25),
@@ -48,3 +49,4 @@ CREATE TABLE Tasks (
     PRIMARY KEY(TaskID),
     FOREIGN KEY(AccountID) REFERENCES Accounts(AccountID)
 )
+
