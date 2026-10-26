@@ -12,4 +12,5 @@ BEGIN
 DELETE FROM Events
 WHERE EventID = p_EventID;
 
-END $$;
+END;
+$$;
