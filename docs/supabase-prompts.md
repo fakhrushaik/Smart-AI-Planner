@@ -41,7 +41,7 @@ Copy one prompt at a time into ChatGPT. ChatGPT is already connected to this Git
 >
 > 1. On sign-in, load that user's events and tasks from Supabase and render them in Today, Calendar, and Tasks.
 > 2. Make add, edit, complete, and delete write through to Supabase, with validation on the client (title required, end after start, date in range, max 1,000 events and 1,000 tasks) and a clear error message if a save fails.
-> 3. Keep JSON export, .ics export, and JSON import working, and add a one-time migration: if a signed-in user already has browser-local plans, offer to import them into Supabase once, then clear the local copy only after a successful save.
+> 3. Keep .ics export and .ics import working in Preferences — JSON file import/export is out of scope there — and add a one-time migration: if a signed-in user already has browser-local plans, offer to import them into Supabase once, then clear the local copy only after a successful save.
 > 4. Handle offline or failed saves honestly: tell the user the change is not saved yet and do not pretend it synced.
 >
 > Acceptance: create an event on one device, reload, and it is still there; sign in as a different user and the first user's plans are not visible. Open a pull request.

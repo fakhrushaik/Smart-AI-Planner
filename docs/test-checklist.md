@@ -18,8 +18,8 @@ Use two disposable, confirmed accounts and fictional plans. Check off only obser
 - [ ] Offline save shows “Not saved,” retains edits for export, and retries after reconnecting.
 - [ ] Two tabs with the same account: stale revision rejects overwrite. Export before reloading.
 - [ ] Local migration requires confirmation; failed save retains the local copy; retry does not duplicate it.
-- [ ] Valid JSON round trip; invalid/oversized/duplicate-ID import rejected before changes.
-- [ ] JSON and calendar exports contain only intended fields; inspect floating time zone behavior.
+- [ ] Valid ICS round trip: export a calendar file, then import it into a clean planner. New events appear; duplicates are skipped and counted; all-day and invalid events are skipped, not silently changed.
+- [ ] Calendar (.ics) exports contain only intended event fields; inspect floating time zone behavior. Tasks are not in .ics files, and Preferences offers ICS import/export only.
 - [ ] 1,000-item limits, invalid dates, reversed times and overlap notices behave correctly.
 
 ## Safari, iPadOS and accessibility
@@ -27,7 +27,7 @@ Use two disposable, confirmed accounts and fictional plans. Check off only obser
 - [ ] Safari on macOS: complete all core flows with keyboard only. Visible focus, logical order, Escape closes dialogs, focus returns sensibly.
 - [ ] VoiceOver on macOS and iPad: labels, headings, status/error announcements, date/time controls and modal focus work.
 - [ ] At 200% text/zoom: no clipped content or unreachable controls. Test narrow portrait and landscape iPad layouts, touch and external keyboard.
-- [ ] Light/Dark Mode: readable text, fields, errors, category labels and focus. Solid mode remains readable in both.
+- [ ] Light/Dark Mode: readable text, fields, errors, category labels and focus. Solid mode remains readable in both. Specifically check callout text, welcome text, and the skip link in Dark Mode — callout text was 1.1:1 before this fix.
 - [ ] Reduce Motion and solid mode suppress decorative animation; no flashing or autoplay.
 - [ ] Touch controls have adequate target sizes; do not rely on color alone.
 - [ ] Privacy/terms accurately match storage, providers, retention and account deletion.

@@ -1,5 +1,9 @@
 # Supabase account preview — October 26, 2026
 
+## Update — October 26, 2026: ICS-only Preferences, dark readability, alignment
+
+Preferences now offers calendar (.ics) import and export only. JSON file import/export was removed from Preferences. ICS imports add new events, skip duplicates, all-day, and invalid events, and do not include tasks. Dark-mode callout text was fixed (it was 1.1:1 contrast), as were the skip link, welcome text, and feature-card, schedule-item, and task-row alignment.
+
 This branch replaces the browser-checked demo login with Supabase email/password authentication. Apple and Google remain on hold. Only `website/` is published by the Pages workflow; pushing this branch does not deploy main.
 
 ## Implemented
