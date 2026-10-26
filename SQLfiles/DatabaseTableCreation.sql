@@ -5,15 +5,9 @@
 -- Create Fields
 -- Create PK and FK
 
-CREATE DATABASE SmartPlanner
-GO
-
-USE SmartPlanner
-GO
-
 -- Accounts
 CREATE TABLE Accounts (
-AccountID int identity(1,1),
+AccountID SERIAL,
 AccountFirstName varchar(25),
 AccountLastName varchar(25),
 AccountEmail varchar(25),
@@ -24,14 +18,14 @@ PRIMARY KEY(AccountID)
 
 -- Events
 CREATE TABLE Events (
-EventID int identity(1,1),
-EventUUID UNIQUEIDENTIFIER PRIMARY KEY DEFAULT NEWID(),
+EventID SERIAL,
+EventUUID UUUID DEFAULT gen_random_uuid(),
 AccountID int,
 EventTitle varchar(25),
 EventDescription varchar(250),
 EventStartDate date,
 EventEndDate date,
-EventAllDay tinyint,
+EventAllDay SMALLINT,
 EventStartTime time,
 EventEndTime time,
 EventNotes varchar(100),
@@ -41,5 +35,6 @@ EventTravelTime varchar(25),
 EventURL varchar(75),
 EventAlert varchar(25),
 PRIMARY KEY(EventID),
+CONSTRAINT uq_event_uuid UNIQUE (EventUUID),
 FOREIGN KEY(AccountID) REFERENCES Accounts(AccountID)
 )
