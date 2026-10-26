@@ -3,7 +3,7 @@
 -- Delete Event
 
 -- Requires only the event ID
-CREATE PROCEDURE delEvent(p_EventID int)
+CREATE OR REPLACE PROCEDURE delEvent(p_EventID int)
 
 LANGUAGE plpgsql 
 AS $$

@@ -3,7 +3,7 @@
 -- Add Event
 
 -- Assume that all var handling will be done prior to execution
-CREATE PROCEDURE newEvent (
+CREATE OR REPLACE PROCEDURE newEvent (
 p_AccountID int,
 p_EventTitle varchar(25),
 p_EventDescription varchar(250),
