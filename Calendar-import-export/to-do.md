@@ -8,7 +8,7 @@ TO DO list for import exports
 [X] BOTH: swap from sqlite3 to pyodbc
 
 [X]SWAP SYNTAX TO POSTGRESQL FROM T-SQL FOR PROCS AND CREATE
-[]Add Tasks table to SQL
+[X]Add Tasks table to SQL
     - task id pk
     - title
     - date
