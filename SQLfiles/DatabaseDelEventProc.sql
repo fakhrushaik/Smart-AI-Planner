@@ -3,14 +3,14 @@
 -- Delete Event
 
 -- Requires only the event ID
-CREATE PROC delEvent
-@EventID as int
+CREATE OR REPLACE PROCEDURE delEvent(p_EventID int, p_AccountID int)
 
-AS
-
-BEGIN TRAN
+LANGUAGE plpgsql 
+AS $$
+BEGIN
 
 DELETE FROM Events
-WHERE EventID=@EventID
+WHERE EventID = p_EventID AND AccountID = p_AccountID;
 
-COMMIT TRAN
+END;
+$$;

@@ -1,57 +1,87 @@
-import sqlite3
 import datetime
+import pyodbc
 
-#Initialize
-conn = sqlite3.connect("SmartPlanner.db")
-cursor = conn.cursor()
+#setup connection string to database TO DO
+conn = ( r"DRIVER={ODBC Driver 17 for SQL Server};"
+    r"SERVER=your_server_name;"
+    r"DATABASE=your_database_name;"
+    r"Trusted_Connection=yes;"
+    )
 
 #Handle AcccountID
 AccountID = ""
 
-#Grab rows
-cursor.execute("SELECT EventUUID, EventTitle, EventStartDate, " \
-"EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, " \
-"EventRepeat, EventTravelTime, EventURL, " \
-"EventAlert FROM Events WHERE AccountID = ?", (AccountID,))
-rows = cursor.fetchall()
+try:
+    #connect to database
+    connection = pyodbc.connect(conn)
+    cursor = connection.cursor()
 
-#Init events list to store events from loop
-ics_eventslist = []
+    #Grab rows
+    cursor.execute("SELECT EventUUID, EventTitle, EventStartDate, " \
+    "EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, " \
+    "EventRepeat, EventTravelTime, EventURL, " \
+    "EventAlert FROM Events WHERE AccountID = ?", (AccountID,))
+    rows = cursor.fetchall()
 
-#Loop through each event row and format the event to be stored
-for row in rows:
-    EventUUID, EventTitle, EventDescription, EventStartDate, EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime, EventURL, EventAlert = row
+    #Init events list to store events from loop
+    ics_eventslist = []
 
-    #Formatting ics text based on template
-    ics_event = f"""
-    BEGIN:VEVENT
-    UID:{EventUUID}6@smartplanner.com
-    DTSTAMP:{datetime.now(datetime.UTC)}
-    DTSTART:{EventStartTime}
-    DTEND:{EventEndTime}
-    SUMMARY:{EventTitle}
-    DESCRIPTION:{EventDescription}
-    LOCATION:{EventLocation}
-    BEGIN:VALARM
-    TRIGGER:{EventAlert}
-    ACTION:DISPLAY
-    DESCRIPTION:Reminder: {EventTitle}
-    END:VALARM
-    END:VEVENT"""
+    #Loop through each event row and format the event to be stored
+    for row in rows:
+        EventUUID, EventTitle, EventDescription, EventStartDate, EventEndDate, EventAllDay, EventStartTime, EventEndTime, EventNotes, EventLocation, EventRepeat, EventTravelTime, EventURL, EventAlert = row
 
-    #Add to list of events
-    ics_eventslist.append(ics_event)
+        #Format Date-time
+        if isinstance(EventStartTime, str):
+            # Fallback if SQL driver returns time as a string (e.g., "14:30:00")
+            EventStartTime = datetime.datetime.strptime(EventStartTime.split(".")[0], "%H:%M:%S").time()
+        EventStartDT = datetime.datetime.combine(EventStartDate, EventStartTime)
 
-#Compile list into body as single object
-ics_body = "\n".join(ics_eventslist)
+        if isinstance(EventEndTime, str):
+            # Fallback if SQL driver returns time as a string (e.g., "14:30:00")
+            EventStartTime = datetime.datetime.strptime(EventEndTime.split(".")[0], "%H:%M:%S").time()
+        EventEndDT = datetime.datetime.combine(EventEndDate, EventEndTime)
 
-#Apply header wrapper
-ics_content = f"""BEGIN:VCALENDAR
-    VERSION:2.0
-    PRODID:-//Smart Planner//EN
-    CALSCALE:GREGORIAN
-    {ics_body}
-    END:VCALENDAR"""
+        #Formatting ics text based on template
+        ics_event = f"""
+        BEGIN:VEVENT
+        UID:{EventUUID}6@smartplanner.com
+        DTSTAMP:{datetime.now(datetime.UTC)}
+        DTSTART:{EventStartDT}
+        DTEND:{EventEndDT}
+        SUMMARY:{EventTitle}
+        DESCRIPTION:{EventDescription}
+        LOCATION:{EventLocation}
+        BEGIN:VALARM
+        TRIGGER:{EventAlert}
+        ACTION:DISPLAY
+        DESCRIPTION:Reminder: {EventTitle}
+        END:VALARM
+        END:VEVENT"""
 
-with open("SmartPlannerEvent.ics", "w", encoding="utf-8") as events:
-    events.write(ics_content)
+        #Add to list of events
+        ics_eventslist.append(ics_event)
+
+    #Compile list into body as single object
+    ics_body = "\n".join(ics_eventslist)
+
+    #Apply header wrapper
+    ics_content = f"""BEGIN:VCALENDAR
+        VERSION:2.0
+        PRODID:-//Smart Planner//EN
+        CALSCALE:GREGORIAN
+        {ics_body}
+        END:VCALENDAR"""
+
+    with open("SmartPlannerEvent.ics", "w", encoding="utf-8") as events:
+        events.write(ics_content)
+
+#catch error in db
+except Exception as db_err:
+    print(f'Database connection or exec failed: {db_err}')
+
+finally:
+    # Close connections always
+    if 'cursor' in locals():
+        cursor.close()
+    if 'conn' in locals():
+        conn.close()
