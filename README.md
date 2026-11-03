@@ -14,7 +14,38 @@ This README is a Markdown adaptation of the [original senior design contract](an
 
 ## Website preview
 
-The static site is published at [Smart Planner](https://fakhrushaik.github.io/Smart-AI-Planner/). Source lives in `website/`; only that directory is included in the Pages artifact. The published preview includes a browser-local planner, accessibility settings, and privacy controls. The account-preview branch adds Supabase authentication and per-user planner storage; it is pending review and merge. AI and live calendar connections remain planned. See [release notes and verification](docs/website-release.md).
+The static site is published at [Smart Planner](https://fakhrushaik.github.io/Smart-AI-Planner/). Source lives in `website/`; only that directory is included in the Pages artifact. The published preview includes a browser-local planner, accessibility settings, and privacy controls. The account-preview branch adds Supabase authentication and per-user planner storage; it is pending review and merge. AI is now an opt-in bring-your-own-key preview in Settings (see the pitch proposal below); live calendar connections remain planned. See [release notes and verification](docs/website-release.md).
+
+## AI assistant (bring your own key) — pitch proposal
+
+This is a proposal for the team, not a change to the contract scope. The contract lists AI task prioritization as in scope, and voice assistant features as out of scope for the capstone timeline, so this pitch needs a team decision before it is presented as a committed feature.
+
+### Why it helps
+
+- A student week is not just a list of events. An assistant that can read today's events and unfinished tasks can answer, in plain words, what is busiest, what needs attention first, and what one small next step is — without the student having to scan a full calendar.
+- Bring-your-own-key (BYOK) keeps the cost and the choice with the user. The team does not pay for every student's AI use, does not need to hold a shared key, and a student who does not want AI can leave it off entirely.
+- It fits the existing planner instead of replacing it. AI suggests; the student still edits, completes, and deletes their own plans. Replies are not treated as deadlines.
+
+### How to use it (in the preview)
+
+1. Open the planner, then Settings.
+2. Under AI assistant, choose ChatGPT (OpenAI) or Claude (Anthropic), enter the model name from your provider, and paste your own API key.
+3. Leave Keep in this browser unchecked to keep the key only in this tab, or check it to keep it in this browser.
+4. Click Test connection, then Ask AI about my week. Ask uses only titles, dates, times, and categories from current events and unfinished tasks.
+5. Click Clear key when you are done, especially on a shared computer.
+
+### What is possible, and what is not
+
+- ChatGPT (OpenAI) and Claude (Anthropic) can be called from the browser with a user's own key. Claude needs the `anthropic-dangerous-direct-browser-access` header, which is Anthropic's own warning that a browser key is visible to anyone with developer tools open — so BYOK is for a personal demo, not for shipping a shared key.
+- Siri has no public web API and no key to paste. There is no Siri option in Settings. On Apple devices, Siri and Shortcuts are separate, and a future native app — not this website — could use App Intents. Do not pitch Siri as a third provider for this site.
+- A key must never be committed to the repo, shared in chat, or stored in Supabase. Set a spending limit with your provider, and rotate a key if it may have leaked.
+- AI replies can be wrong. They do not change your events or tasks by themselves, and deadlines must still be checked in the calendar.
+
+### What would come next, if the team agrees
+
+- A server-side proxy (for example a Supabase Edge Function) that holds no shared key in the browser, so students do not need their own keys and keys are not visible in developer tools.
+- AI suggestions that the student can accept or reject as real events or tasks, with a clear record of what the AI suggested.
+- Remote push notifications, separately: a service worker, VAPID keys, a push-subscriptions table, and a Supabase Edge Function to send messages. Supabase does not send browser push on its own, and remote push when the tab is closed is not included in this preview.
 
 ## Intent
 
