@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="120" height="960" viewBox="0 0 120 960" role="img" aria-label="Flower vine, end to end">
+  <path d="M60 0 C 28 80, 92 160, 60 240 C 28 320, 92 400, 60 480 C 28 560, 92 640, 60 720 C 28 800, 92 880, 60 960" fill="none" stroke="#7a9a5b" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#8fb573">
+    <ellipse cx="40" cy="110" rx="17" ry="7" transform="rotate(-30 40 110)"/>
+    <ellipse cx="80" cy="190" rx="17" ry="7" transform="rotate(30 80 190)"/>
+    <ellipse cx="40" cy="350" rx="17" ry="7" transform="rotate(-30 40 350)"/>
+    <ellipse cx="80" cy="430" rx="17" ry="7" transform="rotate(30 80 430)"/>
+    <ellipse cx="40" cy="590" rx="17" ry="7" transform="rotate(-30 40 590)"/>
+    <ellipse cx="80" cy="670" rx="17" ry="7" transform="rotate(30 80 670)"/>
+    <ellipse cx="40" cy="830" rx="17" ry="7" transform="rotate(-30 40 830)"/>
+    <ellipse cx="80" cy="910" rx="17" ry="7" transform="rotate(30 80 910)"/>
+  </g>
+  <g>
+    <g transform="translate(60 8)"><circle cx="0" cy="-10" r="8" fill="#c4b5fd"/><circle cx="10" cy="-3" r="8" fill="#c4b5fd"/><circle cx="6" cy="9" r="8" fill="#c4b5fd"/><circle cx="-6" cy="9" r="8" fill="#c4b5fd"/><circle cx="-10" cy="-3" r="8" fill="#c4b5fd"/><circle r="5" fill="#ffd66e"/></g>
+    <g transform="translate(60 70)"><circle cx="0" cy="-14" r="10" fill="#c4b5fd"/><circle cx="13" cy="-4" r="10" fill="#c4b5fd"/><circle cx="8" cy="12" r="10" fill="#c4b5fd"/><circle cx="-8" cy="12" r="10" fill="#c4b5fd"/><circle cx="-13" cy="-4" r="10" fill="#c4b5fd"/><circle r="7" fill="#ffd66e"/></g>
+    <g transform="translate(60 130)"><circle cx="0" cy="-9" r="7" fill="#ffb38a"/><circle cx="9" cy="-3" r="7" fill="#ffb38a"/><circle cx="5" cy="8" r="7" fill="#ffb38a"/><circle cx="-5" cy="8" r="7" fill="#ffb38a"/><circle cx="-9" cy="-3" r="7" fill="#ffb38a"/><circle r="4" fill="#ffd66e"/></g>
+    <g transform="translate(60 220)"><circle cx="0" cy="-12" r="9" fill="#ffdac8"/><circle cx="11" cy="-4" r="9" fill="#ffdac8"/><circle cx="7" cy="10" r="9" fill="#ffdac8"/><circle cx="-7" cy="10" r="9" fill="#ffdac8"/><circle cx="-11" cy="-4" r="9" fill="#ffdac8"/><circle r="6" fill="#6142ad"/></g>
+    <g transform="translate(60 300)"><circle cx="0" cy="-12" r="9" fill="#ffb38a"/><circle cx="11" cy="-4" r="9" fill="#ffb38a"/><circle cx="7" cy="10" r="9" fill="#ffb38a"/><circle cx="-7" cy="10" r="9" fill="#ffb38a"/><circle cx="-11" cy="-4" r="9" fill="#ffb38a"/><circle r="6" fill="#ffd66e"/></g>
+    <g transform="translate(60 380)"><circle cx="0" cy="-9" r="7" fill="#dceaf6"/><circle cx="9" cy="-3" r="7" fill="#dceaf6"/><circle cx="5" cy="8" r="7" fill="#dceaf6"/><circle cx="-5" cy="8" r="7" fill="#dceaf6"/><circle cx="-9" cy="-3" r="7" fill="#dceaf6"/><circle r="4" fill="#6142ad"/></g>
+    <g transform="translate(60 470)"><circle cx="0" cy="-12" r="9" fill="#b7a6e8"/><circle cx="11" cy="-4" r="9" fill="#b7a6e8"/><circle cx="7" cy="10" r="9" fill="#b7a6e8"/><circle cx="-7" cy="10" r="9" fill="#b7a6e8"/><circle cx="-11" cy="-4" r="9" fill="#b7a6e8"/><circle r="6" fill="#fff3c4"/></g>
+    <g transform="translate(60 560)"><circle cx="0" cy="-9" r="7" fill="#ffdac8"/><circle cx="9" cy="-3" r="7" fill="#ffdac8"/><circle cx="5" cy="8" r="7" fill="#ffdac8"/><circle cx="-5" cy="8" r="7" fill="#ffdac8"/><circle cx="-9" cy="-3" r="7" fill="#ffdac8"/><circle r="4" fill="#6142ad"/></g>
+    <g transform="translate(60 650)"><circle cx="0" cy="-14" r="10" fill="#c4b5fd"/><circle cx="13" cy="-4" r="10" fill="#c4b5fd"/><circle cx="8" cy="12" r="10" fill="#c4b5fd"/><circle cx="-8" cy="12" r="10" fill="#c4b5fd"/><circle cx="-13" cy="-4" r="10" fill="#c4b5fd"/><circle r="7" fill="#ffd66e"/></g>
+    <g transform="translate(60 740)"><circle cx="0" cy="-9" r="7" fill="#ffb38a"/><circle cx="9" cy="-3" r="7" fill="#ffb38a"/><circle cx="5" cy="8" r="7" fill="#ffb38a"/><circle cx="-5" cy="8" r="7" fill="#ffb38a"/><circle cx="-9" cy="-3" r="7" fill="#ffb38a"/><circle r="4" fill="#ffd66e"/></g>
+    <g transform="translate(60 830)"><circle cx="0" cy="-12" r="9" fill="#b7a6e8"/><circle cx="11" cy="-4" r="9" fill="#b7a6e8"/><circle cx="7" cy="10" r="9" fill="#b7a6e8"/><circle cx="-7" cy="10" r="9" fill="#b7a6e8"/><circle cx="-11" cy="-4" r="9" fill="#b7a6e8"/><circle r="6" fill="#fff3c4"/></g>
+    <g transform="translate(60 920)"><circle cx="0" cy="-12" r="9" fill="#ffb38a"/><circle cx="11" cy="-4" r="9" fill="#ffb38a"/><circle cx="7" cy="10" r="9" fill="#ffb38a"/><circle cx="-7" cy="10" r="9" fill="#ffb38a"/><circle cx="-11" cy="-4" r="9" fill="#ffb38a"/><circle r="6" fill="#ffd66e"/></g>
+    <g transform="translate(60 952)"><circle cx="0" cy="-10" r="8" fill="#c4b5fd"/><circle cx="10" cy="-3" r="8" fill="#c4b5fd"/><circle cx="6" cy="9" r="8" fill="#c4b5fd"/><circle cx="-6" cy="9" r="8" fill="#c4b5fd"/><circle cx="-10" cy="-3" r="8" fill="#c4b5fd"/><circle r="5" fill="#ffd66e"/></g>
+  </g>
+  <g fill="#a8c98a"><circle cx="28" cy="180" r="5"/><circle cx="92" cy="420" r="5"/><circle cx="30" cy="600" r="5"/><circle cx="92" cy="880" r="5"/></g>
+</svg>
