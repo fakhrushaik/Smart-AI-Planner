@@ -1,0 +1,57 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Smart Planner//Sample Week//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Smart Planner sample week
+X-WR-TIMEZONE:America/New_York
+BEGIN:VEVENT
+UID:sample-week-1@smart-planner
+DTSTAMP:20261105T120000Z
+DTSTART:20261102T090000
+DTEND:20261102T095000
+SUMMARY:Class — Database Systems
+LOCATION:Campus
+CATEGORIES:class
+DESCRIPTION:Sample event for trying the .ics import in Smart Planner.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-2@smart-planner
+DTSTAMP:20261105T120000Z
+DTSTART:20261103T110000
+DTEND:20261103T123000
+SUMMARY:Class — Software design lab
+LOCATION:Campus
+CATEGORIES:class
+DESCRIPTION:Sample event for trying the .ics import in Smart Planner.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-3@smart-planner
+DTSTAMP:20261105T120000Z
+DTSTART:20261104T140000
+DTEND:20261104T170000
+SUMMARY:Work — Campus café shift
+LOCATION:Campus café
+CATEGORIES:work
+DESCRIPTION:Sample event for trying the .ics import in Smart Planner.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-4@smart-planner
+DTSTAMP:20261105T120000Z
+DTSTART:20261105T150000
+DTEND:20261105T160000
+SUMMARY:Focus — Finish SQL lab
+LOCATION:Library
+CATEGORIES:focus
+DESCRIPTION:Sample event for trying the .ics import in Smart Planner.
+END:VEVENT
+BEGIN:VEVENT
+UID:sample-week-5@smart-planner
+DTSTAMP:20261105T120000Z
+DTSTART:20261107T130000
+DTEND:20261107T140000
+SUMMARY:Personal — Downtime with friends
+CATEGORIES:personal
+DESCRIPTION:Sample event for trying the .ics import in Smart Planner.
+END:VEVENT
+END:VCALENDAR
