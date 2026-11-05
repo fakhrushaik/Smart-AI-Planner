@@ -1,5 +1,21 @@
 # Supabase account preview — October 26, 2026
 
+## Update — November 2, 2026: Bento Settings, clock, dynamic examples, no sample button, custom 404, Contact placeholder
+
+Settings is now a bento grid: Profile, Appearance, Time & timezone, Notifications, AI assistant, Privacy & data, Accessibility, and Delete account, using the existing palette, 14px gutters, and 32px tiles. A date/time clock with timezone is shown in the header of every page and in the planner top bar, updating every 30 seconds. Example previews on the bento and home pages now show today's date, not a fixed October 5 date, and examples start from the day the site is opened. The "Add example week" button and its handler were removed from everywhere; sample plans now live only in a team test account, on request via Contact (see docs/test-account.md). Notifications were checked: Settings now shows a diagnostic line (support, permission, secure context) and explains the Safari denied-permission case, where Safari will not ask again and the setting must be changed in Safari Settings > Websites > Notifications and System Settings > Notifications > Safari. Remote push when the tab is closed is still not included. A custom, palette-matched 404 page ("This page took a wrong turn") is now in place, with bento tiles back to Bento, Home, Planner, and Contact. Contact is a 404-style placeholder saying the page is still being built; its form is disabled and sends nothing.
+
+## Update — November 2, 2026: Theme toggle, Settings, notifications, BYO AI, Bento on every page
+
+Preferences is now Settings in the planner. Settings adds Light / Dark / System theme (also a sun/moon button at the top of every page, saved on this device only), a Notifications panel (permission, test notification, and reminders while the planner is open for events starting in the next 15 minutes), and a bring-your-own-key AI panel (ChatGPT and Claude; Siri has no web API and is not offered as a key option). Remote push when the tab is closed is not included — it needs a service worker, VAPID keys, and a Supabase Edge Function, and Supabase does not send browser push on its own. Every page now has a Bento link in its header and footer, and the planner sidebar, so you can return to the bento entry from anywhere.
+
+## Update — November 2, 2026: Apple bento entry, Get In to homepage
+
+`website/index.html` is now an Apple-style bento entry: a 4-column desktop grid, 14px gutters, 32px tiles, hero tile 2×2, with staggered pop-in animations, existing palette and system fonts only, and no new colours or external icons. The purple Get In tile links to `website/home.html`, which is the previous homepage preserved unchanged apart from its brand links. Internal Home/brand links in about, privacy, accessibility, terms, login, and planner now go to `home.html`, so once inside the site you stay inside; the bento remains the root entry at `index.html`. Coming-next items are marked Coming soon and are not working buttons. Animations are off for reduced motion and solid mode.
+
+## Update — October 26, 2026: ICS-only Preferences, dark readability, alignment
+
+Preferences now offers calendar (.ics) import and export only. JSON file import/export was removed from Preferences. ICS imports add new events, skip duplicates, all-day, and invalid events, and do not include tasks. Dark-mode callout text was fixed (it was 1.1:1 contrast), as were the skip link, welcome text, and feature-card, schedule-item, and task-row alignment.
+
 This branch replaces the browser-checked demo login with Supabase email/password authentication. Apple and Google remain on hold. Only `website/` is published by the Pages workflow; pushing this branch does not deploy main.
 
 ## Implemented
