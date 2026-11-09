@@ -34,7 +34,7 @@
 - [x] Enter a password containing at least 12 characters.
 - [x] Submit the account.
 - [x] Confirm an understandable success/confirmation message appears.
-- [:x:] Confirm the confirmation email is received.
+- [FAIL] Confirm the confirmation email is received.
         - I'm not recieving a confirmation email from supabase 
 - [ ] Confirm the email-confirmation link returns to Smart Planner correctly.
 - [ ] Sign in with the newly created account.
@@ -57,7 +57,7 @@
 ## Password Requirement Verification
 
 - [x] Confirm the website requires at least 12 characters during account creation.
-- [:x:] Confirm the password-reset flow also requires at least 12 characters.
+- [FAIL] Confirm the password-reset flow also requires at least 12 characters.
         - Password reset page doesn't exist, instead takes you back to the same login page
 - [ ] Verify the Supabase authentication configuration matches the password policy shown by the website.
 - [ ] Confirm the website does not encourage reuse of a university password.
