@@ -58,7 +58,6 @@
 
 - [x] Confirm the website requires at least 12 characters during account creation.
 - [FAIL] Confirm the password-reset flow also requires at least 12 characters.
-        - Password reset page doesn't exist, instead takes you back to the same login page
 - [ ] Verify the Supabase authentication configuration matches the password policy shown by the website.
 - [ ] Confirm the website does not encourage reuse of a university password.
 
@@ -92,10 +91,11 @@
 ## Password Reset
 
 - [x] Select **Forgot password?** and Confirm the form changes to password-reset mode.
-- [ ] Submit a valid test email.
-- [ ] Confirm a clear reset message appears.
-- [ ] If email service is active, confirm the reset email arrives.
-- [ ] Open the reset link.
+- [x] Submit a valid test email.
+- [x] Confirm a clear reset message appears.
+- [x] If email service is active, confirm the reset email arrives.
+- [x] Open the reset link.
+    - Password reset page doesn't exist, instead takes you back to the same login page
 - [ ] Try a new password shorter than 12 characters.
 - [ ] Confirm it is rejected.
 - [ ] Set a valid new password.
