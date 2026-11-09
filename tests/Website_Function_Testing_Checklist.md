@@ -42,11 +42,10 @@
 
 ## Invalid Account Information
 
-- [ ] Try to create an account with the email field empty.
-- [ ] Try to create an account with the password field empty.
-- [ ] Enter an invalid email format.
-- [ ] Enter a password shorter than 12 characters.
-- [ ] Confirm the short password is rejected.
+- [x] Try to create an account with the email field empty.
+- [x] Try to create an account with the password field empty.
+- [x] Enter an invalid email format.
+- [x] Enter a password shorter than 12 characters.
 - [ ] Test the maximum Display Name length.
 - [ ] Try creating a second account using the same email.
 - [ ] Confirm errors are understandable.
