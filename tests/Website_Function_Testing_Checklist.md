@@ -27,14 +27,14 @@
 
 - [x] Open Sign In.
 - [x] Select **Create account**.
-- [ ] Confirm the account-creation form appears correctly.
-- [ ] Confirm Display Name is optional.
-- [ ] Enter a fictional display name.
-- [ ] Enter a valid test email.
-- [ ] Enter a password containing at least 12 characters.
-- [ ] Submit the account.
-- [ ] Confirm an understandable success/confirmation message appears.
-- [ ] If email confirmation is active, confirm the confirmation email is received.
+- [x] Confirm the account-creation form appears correctly.
+- [x] Confirm Display Name is optional.
+- [x] Enter a display name.
+- [x] Enter a valid test email.
+- [x] Enter a password containing at least 12 characters.
+- [x] Submit the account.
+- [x] Confirm an understandable success/confirmation message appears.
+- [ ] Confirm the confirmation email is received.
 - [ ] Confirm the email-confirmation link returns to Smart Planner correctly.
 - [ ] Sign in with the newly created account.
 - [ ] Confirm the correct display name/email appears after sign-in.
@@ -55,13 +55,13 @@
 
 ## Password Requirement Verification
 
-- [ ] Confirm the website requires at least 12 characters during account creation.
-- [ ] Confirm the password-reset flow also requires at least 12 characters.
+- [x] Confirm the website requires at least 12 characters during account creation.
+- [] Confirm the password-reset flow also requires at least 12 characters.
 - [ ] Verify the Supabase authentication configuration matches the password policy shown by the website.
 - [ ] Confirm the website does not encourage reuse of a university password.
 
 ---
-
+ 
 # 3. Sign-In
 
 - [ ] Sign in with a valid account.
@@ -82,17 +82,14 @@
 
 ## Show / Hide Password
 
-- [ ] Select **Show password**.
-- [ ] Confirm the password becomes visible.
-- [ ] Confirm the button changes to **Hide password**.
-- [ ] Select Hide password.
-- [ ] Confirm the password is hidden again.
-- [ ] Confirm the control works with keyboard input.
+- [x] Confirm the password becomes visible.
+- [x] Confirm the button changes to **Hide password**.
+- [x] Confirm the password is hidden again.
+- [x] Confirm the control works with keyboard input.
 
 ## Password Reset
 
-- [ ] Select **Forgot password?**.
-- [ ] Confirm the form changes to password-reset mode.
+- [x] Select **Forgot password?** and Confirm the form changes to password-reset mode.
 - [ ] Submit a valid test email.
 - [ ] Confirm a clear reset message appears.
 - [ ] If email service is active, confirm the reset email arrives.
