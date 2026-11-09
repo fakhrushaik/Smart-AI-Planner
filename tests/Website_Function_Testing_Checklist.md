@@ -2,23 +2,22 @@
 
 # 1. Basic Website Navigation
 
-- [ ] Open the Smart Planner landing/features page.
-- [ ] Open the Home page.
-- [ ] Open the Planner from the main navigation.
-- [ ] Open the Planner as a guest/local demo.
-- [ ] Open the Sign In page.
-- [ ] Open the Our Story page.
-- [ ] Open the Privacy page.
-- [ ] Open the Accessibility page.
-- [ ] Open the Terms page.
-- [ ] Open the Contact page.
-- [ ] Confirm the menu opens and closes correctly.
-- [ ] Confirm all visible navigation links go to the expected page.
-- [ ] Confirm footer links work.
-- [ ] Confirm the Smart Planner logo returns the user to the expected page.
-- [ ] Try a nonexistent page and confirm the custom 404 page appears.
-- [ ] Confirm the 404 page provides working links back to the site.
-- [ ] Confirm unfinished features/pages are clearly identified as unfinished.
+- [x] Open the Smart Planner landing/features page.
+- [x] Open the Home page.
+- [x] Open the Planner as a guest/local demo.
+- [x] Open the Sign In page.
+- [x] Open the Our Story page.
+- [x] Open the Privacy page.
+- [x] Open the Accessibility page.
+- [x] Open the Terms page.
+- [x] Open the Contact page.
+- [x] Confirm the menu opens and closes correctly.
+- [x] Confirm all visible navigation links go to the expected page.
+- [x] Confirm footer links work.
+- [x] Confirm the Smart Planner logo returns the user to the landing page.
+- [x] Try a nonexistent page and confirm the custom 404 page appears.
+- [x] Confirm the 404 page provides working links back to the site.
+- [x] Confirm unfinished features/pages are clearly identified as unfinished.
 
 ---
 
@@ -26,8 +25,8 @@
 
 ## Valid Account
 
-- [ ] Open Sign In.
-- [ ] Select **Create account**.
+- [x] Open Sign In.
+- [x] Select **Create account**.
 - [ ] Confirm the account-creation form appears correctly.
 - [ ] Confirm Display Name is optional.
 - [ ] Enter a fictional display name.
