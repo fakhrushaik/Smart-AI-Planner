@@ -15,8 +15,7 @@ export const client = createClient(config.url, config.publishableKey, {
     autoRefreshToken: true, detectSessionInUrl: false, flowType: 'pkce' }
 });
 export function callbackURL(recovery = false) {
-  const url = new URL('login.html', location.href);
-  if (recovery) url.searchParams.set('flow', 'recovery');
+  const url = new URL(recovery ? 'reset-password.html' : 'login.html', location.href);
   return url.href;
 }
 export async function currentUser() {

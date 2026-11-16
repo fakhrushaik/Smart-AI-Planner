@@ -68,7 +68,10 @@ for(const provider of ['google','apple']) {
 $('provider-note').hidden=config.providers.google&&config.providers.apple;
 $('sign-out').addEventListener('click',()=>run(async()=>{await signOut();$('session-note').hidden=true;message('Signed out.');}));
 setMode('signin');
+// Preserve old recovery URLs, including their query and fragment, without consuming the code.
+if(new URLSearchParams(location.search).get('flow')==='recovery') location.replace('reset-password.html'+location.search+location.hash);
 (async()=>{
+  if(new URLSearchParams(location.search).get('flow')==='recovery')return;
   try {
     // Remove the old demo marker; it has no authentication authority.
     authStorage.removeItem('smart-planner:session:v1');

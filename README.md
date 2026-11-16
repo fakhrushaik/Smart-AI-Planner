@@ -14,7 +14,7 @@ This README is a Markdown adaptation of the [original senior design contract](an
 
 ## Website preview
 
-The static site is published at [Smart Planner](https://fakhrushaik.github.io/Smart-AI-Planner/). Source lives in `website/`; only that directory is included in the Pages artifact. The published preview includes a browser-local planner, accessibility settings, and privacy controls. The account-preview branch adds Supabase authentication and per-user planner storage; it is pending review and merge. AI is now an opt-in bring-your-own-key preview in Settings (see the pitch proposal below); live calendar connections remain planned. See [release notes and verification](docs/website-release.md).
+The static site is published at [Smart Planner](https://fakhrushaik.github.io/Smart-AI-Planner/). GitHub Pages serves `docs/`; `website/` is a maintained source mirror. Supabase email accounts and per-user planner storage are in the current code. Email delivery remains a release gate in [#39](https://github.com/fakhrushaik/Smart-AI-Planner/issues/39). The November account-recovery/profile changes are proposed on a feature branch, not deployed. See [November 20 sprint and release checks](docs/nov20-release.md) and [release notes](docs/website-release.md). AI remains an opt-in bring-your-own-key preview; live calendar connections remain planned.
 
 ## AI assistant (bring your own key) — pitch proposal
 

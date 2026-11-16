@@ -3,13 +3,16 @@
   "private": true,
   "scripts": {
     "vendor": "esbuild scripts/supabase-entry.js --bundle --format=esm --platform=browser --minify --outfile=website/vendor/supabase.js",
-    "test": "node --test tests/*.test.mjs"
+    "test": "node --test tests/*.test.mjs",
+    "test:db": "node tests/sql/account-details.mjs"
   },
   "dependencies": {
     "@supabase/supabase-js": "2.118.0"
   },
   "devDependencies": {
-    "esbuild": "0.28.2"
+    "@electric-sql/pglite": "0.3.14",
+    "esbuild": "0.28.2",
+    "jsdom": "26.1.0"
   },
   "type": "module"
 }
