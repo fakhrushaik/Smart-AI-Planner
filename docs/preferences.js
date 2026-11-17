@@ -36,10 +36,6 @@
   document.addEventListener('click', event => { if (!event.target.closest('.nav-menu')) closeMenus(); });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenus(); });
   document.querySelectorAll('.nav-menu nav a').forEach(a => a.addEventListener('click', closeMenus));
-  /* Logo, 2026-11-05: replace the ✳ text mark with our own SVG sparkle logo on every page. */
-  document.querySelectorAll('.brand-icon').forEach(el => {
-    el.innerHTML = '<svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="9" fill="#6142ad"/><path d="M16 5 L18.6 13.4 L27 16 L18.6 18.6 L16 27 L13.4 18.6 L5 16 L13.4 13.4 Z" fill="#fff"/></svg>';
-  });
   document.addEventListener('change', event => {
     if (event.target.matches('[data-solid]')) {
       applySolid(event.target.checked);
