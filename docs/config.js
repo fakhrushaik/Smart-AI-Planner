@@ -3,5 +3,5 @@
 export const config = Object.freeze({
   url: 'https://rvjqwvkikciwpwbfspgp.supabase.co',
   publishableKey: 'sb_publishable_giuf5Q0mVbd43zc-nAriAg_q_EPsIVb',
-  providers: { google: false, apple: false }
+  providers: { google: false, apple: false, github: false }
 });

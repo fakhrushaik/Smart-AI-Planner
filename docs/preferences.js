@@ -19,7 +19,9 @@
     if (theme === 'system') document.documentElement.removeAttribute('data-theme');
     else document.documentElement.setAttribute('data-theme', theme);
     document.querySelectorAll('[data-theme-toggle]').forEach(el => {
-      el.innerHTML = themeIcon(theme);
+      /* Icon-only buttons get the SVG; labelled menu rows keep their text and only their icon and theme-name parts are updated. */
+      if (el.classList.contains('theme-toggle')) el.innerHTML = themeIcon(theme);
+      else { const icon = el.querySelector('.theme-icon'); if (icon) icon.innerHTML = themeIcon(theme); const name = el.querySelector('.theme-name'); if (name) name.textContent = theme; }
       el.setAttribute('aria-label', 'Appearance: ' + theme + '. Click to change appearance.');
       el.setAttribute('title', 'Appearance: ' + theme);
       el.setAttribute('data-tip', 'Appearance: ' + theme);
@@ -32,8 +34,12 @@
   applyTheme(theme);
   /* Dropdown top bar, 2026-11-05: Menu button toggles the nav panel; Escape or a click outside closes it. */
   const closeMenus = () => document.querySelectorAll('.nav-menu.open').forEach(m => { m.classList.remove('open'); const b = m.querySelector('[data-nav-toggle]'); if (b) b.setAttribute('aria-expanded', 'false'); });
-  document.querySelectorAll('[data-nav-toggle]').forEach(btn => btn.addEventListener('click', event => { event.stopPropagation(); const menu = btn.closest('.nav-menu'); const open = !menu.classList.contains('open'); closeMenus(); if (open) { menu.classList.add('open'); btn.setAttribute('aria-expanded', 'true'); } }));
-  document.addEventListener('click', event => { if (!event.target.closest('.nav-menu')) closeMenus(); });
+  /* Delegated (2026-11-18): the planner renders its menu trigger after load, so the toggle is handled here instead of per-button. A click on a toggle opens/closes its menu; a click anywhere else outside a menu closes open menus. */
+  document.addEventListener('click', event => {
+    const toggle = event.target.closest('[data-nav-toggle]');
+    if (toggle) { const menu = toggle.closest('.nav-menu'); const open = !menu.classList.contains('open'); closeMenus(); if (open) { menu.classList.add('open'); toggle.setAttribute('aria-expanded', 'true'); } return; }
+    if (!event.target.closest('.nav-menu')) closeMenus();
+  });
   document.addEventListener('keydown', event => { if (event.key === 'Escape') closeMenus(); });
   document.querySelectorAll('.nav-menu nav a').forEach(a => a.addEventListener('click', closeMenus));
   document.addEventListener('change', event => {
